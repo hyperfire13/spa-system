@@ -2,7 +2,7 @@ export default function Hero() {
   return (
     <section className="hero-section">
       <div className="fade-up">
-        <p className="hero-subtitle">WHERE BEAUTY MEETS SERENITY</p>
+        <p className="hero-subtitle">WHERE BEAUTY MEETS ARTISTRY</p>
 
         <h1 className="display-5 fw-semibold gold-text">
           Timeless<br/>
