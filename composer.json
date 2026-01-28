@@ -65,7 +65,9 @@
         ],
         "pre-package-uninstall": [
             "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
-        ]
+        ],
+        "build": "vite build",
+        "heroku-postbuild": "npm run build"
     },
     "extra": {
         "laravel": {
