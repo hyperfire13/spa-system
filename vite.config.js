@@ -14,5 +14,11 @@ export default defineConfig({
         watch: {
             ignored: ['**/storage/framework/views/**'],
         },
+        server: {
+        host: 'spa.local',
+        hmr: {
+            host: 'spa.local',
+        },
+    },
     },
 });

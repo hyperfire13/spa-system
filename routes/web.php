@@ -1,11 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LandingPageController;
+
 
 // Route::get('/', function () {
 //     return view('welcome');
 // });
 
-Route::get('/{any}', function () {
+Route::get('/', function () {
     return view('welcome');
-})->where('any', '.*');
+});
+
+// Route::resource('admin/services',LandingPageController::class);
+
