@@ -33,7 +33,7 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
-  animation: shine 3s linear infinite;
+  animation: shine 11s ease-in-out infinite;
 }
 
 @keyframes shine {
