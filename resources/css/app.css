@@ -9,3 +9,96 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+
+body {
+  font-family: 'Instrument Sans', sans-serif;
+  background: #fff;
+}
+
+/* Gold gradient text */
+.gold-text {
+  background: linear-gradient(
+    110deg,
+    #8f6b1f 20%,
+    #f8e28a 40%,
+    #ffffff 50%,
+    #f8e28a 60%,
+    #8f6b1f 80%
+  );
+  background-size: 200% auto;
+
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: shine 3s linear infinite;
+}
+
+@keyframes shine {
+  from {
+    background-position: 200% center;
+  }
+  to {
+    background-position: -200% center;
+  }
+}
+
+
+/* Buttons */
+.btn-gold {
+  background: linear-gradient(180deg, #f5d27a, #c9a24d);
+  color: white;
+  border-radius: 999px;
+  padding: 0.6rem 1.8rem;
+  border: none;
+}
+
+.btn-gold:hover {
+  opacity: 0.9;
+}
+
+/* Hero */
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.hero-subtitle {
+  letter-spacing: 3px;
+  font-size: 0.7rem;
+  color: #bfa24a;
+}
+
+/* Animations */
+.fade-up {
+  animation: fadeUp 1.2s ease forwards;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Cards */
+.service-card {
+  border: none;
+  border-radius: 16px;
+  transition: 0.3s;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}

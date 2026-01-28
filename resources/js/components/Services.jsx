@@ -60,14 +60,14 @@ export default function Services() {
   return (
     <section className="py-5 bg-white">
       <div className="container">
-        <h2 className="text-warning text-center mb-4">Our Services</h2>
+        <h2 className="gold-text text-center mb-4">Our Services</h2>
 
         <div className="row g-4">
           {services.map(service => (
             <div className="col-md-4" key={service.id}>
               <div className="card shadow-sm h-100">
                 <div className="card-body text-center">
-                  <h5 className="text-warning">
+                  <h5 className="gold-text">
                     {service.name ?? "Unnamed Service"}
                   </h5>
 
@@ -75,7 +75,7 @@ export default function Services() {
                     {service.description ?? "No description available."}
                   </p>
 
-                  <strong className="text-warning">
+                  <strong className="gold-text">
                     ₱{service.price ?? "0.00"}
                   </strong>
                 </div>
