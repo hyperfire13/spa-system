@@ -61,12 +61,13 @@ body {
 
 /* Hero */
 .hero-section {
-  min-height: 100vh;
+  min-height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   padding: 2rem;
+  margin-bottom: -5rem;
 }
 
 .hero-subtitle {

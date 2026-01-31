@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../lib/api";
+import Loading from "./Loading";
+import ErrorMessage from "./ErrorMessage";
 
-export default function Services() {
+export default function Services({ limit }) {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -9,81 +11,35 @@ export default function Services() {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await axios.get("/api/services");
-
-        // Handle different possible API shapes safely
-        const data = response.data;
-
-        if (Array.isArray(data)) {
-          setServices(data);
-        } else if (Array.isArray(data.data)) {
-          setServices(data.data); // Laravel paginator or resource
-        } else {
-          throw new Error("Invalid service data format");
-        }
-
-      } catch (err) {
-        console.error("Service fetch error:", err);
-        setError("Unable to load services at the moment.");
+        const res = await api.get("/services");
+        const data = Array.isArray(res.data) ? res.data : res.data.data || [];
+        setServices(limit ? data.slice(0, limit) : data);
+      } catch {
+        setError("Failed to load services.");
       } finally {
         setLoading(false);
       }
     };
 
     fetchServices();
-  }, []);
+  }, [limit]);
 
-  if (loading) {
-    return (
-      <section className="py-5 text-center">
-        <p className="text-muted">Loading services...</p>
-      </section>
-    );
-  }
-
-  if (error) {
-    return (
-      <section className="py-5 text-center">
-        <p className="text-danger">{error}</p>
-      </section>
-    );
-  }
-
-  if (services.length === 0) {
-    return (
-      <section className="py-5 text-center">
-        <p className="text-muted">No services available at the moment.</p>
-      </section>
-    );
-  }
+  if (loading) return <Loading />;
+  if (error) return <ErrorMessage message={error} />;
 
   return (
-    <section className="py-5 bg-white">
-      <div className="container">
-        <h2 className="gold-text text-center mb-4">Our Services</h2>
-
-        <div className="row g-4">
-          {services.map(service => (
-            <div className="col-md-4" key={service.id}>
-              <div className="card shadow-sm h-100">
-                <div className="card-body text-center">
-                  <h5 className="gold-text">
-                    {service.name ?? "Unnamed Service"}
-                  </h5>
-
-                  <p className="text-muted">
-                    {service.description ?? "No description available."}
-                  </p>
-
-                  <strong className="gold-text">
-                    ₱{service.price ?? "0.00"}
-                  </strong>
-                </div>
-              </div>
+    <div className="row g-4">
+      {services.map(service => (
+        <div className="col-md-4" key={service.id}>
+          <div className="card service-card h-100">
+            <div className="card-body text-center">
+              <h5 className="gold-text">{service.name}</h5>
+              <p className="text-muted">{service.description}</p>
+              <strong className="gold-text">₱{service.price}</strong>
             </div>
-          ))}
+          </div>
         </div>
-      </div>
-    </section>
+      ))}
+    </div>
   );
 }

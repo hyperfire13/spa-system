@@ -1,15 +1,20 @@
+import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Services from "./components/Services";
-import ReservationForm from "./components/ReservationForm";
+
+import Home from "./pages/Home";
+import ServicesPage from "./pages/ServicesPage";
+import ReservationPage from "./pages/ReservationPage";
 
 export default function App() {
   return (
     <>
       <Navbar />
-      <Hero />
-      <Services />
-      <ReservationForm />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/services" element={<ServicesPage />} />
+        <Route path="/reservation" element={<ReservationPage />} />
+      </Routes>
     </>
   );
 }
