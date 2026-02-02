@@ -2,19 +2,18 @@ export default function Gallery() {
   const slides = ["Spa Interior", "Massage Room", "Relax Area"];
 
   return (
-    <section className="container py-5">
+    <section className="container bg-dark py-5">
       <div
         id="spaGallery"
         className="carousel slide"
         data-bs-ride="carousel"
-        data-bs-interval="2500"
-        data-bs-theme="dark"
+        data-bs-interval="1000"
       >
         <div className="carousel-inner rounded-4 shadow-sm">
           {slides.map((title, i) => (
             <div className={`carousel-item ${i === 0 ? "active" : ""}`} key={i}>
               <div
-                className="d-flex justify-content-center align-items-center bg-light"
+                className="d-flex justify-content-center align-items-center bg-dark"
                 style={{ height: "300px" }}
               >
                 <h3 className="gold-text">{title}</h3>

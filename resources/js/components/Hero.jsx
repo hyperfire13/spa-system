@@ -1,8 +1,8 @@
 export default function Hero() {
   return (
-    <section className="hero-section">
+    <section className="hero-section mt-5 mb-5">
       <div className="fade-up">
-        <p className="hero-subtitle">WHERE BEAUTY MEETS ARTISTRY</p>
+        <p className="hero-subtitle gold-text">WHERE BEAUTY MEETS ARTISTRY</p>
 
         <h1 className="display-5 fw-semibold gold-text">
           Timeless<br/>

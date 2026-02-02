@@ -8,9 +8,9 @@ use App\Http\Controllers\LandingPageController;
 //     return view('welcome');
 // });
 
-Route::get('/', function () {
+Route::get('/{any}', function () {
     return view('welcome');
-});
+})->where('any', '^(?!api).*$');
 
 // Route::resource('admin/services',LandingPageController::class);
 

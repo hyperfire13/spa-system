@@ -1,6 +1,6 @@
 export default function ReservationForm() {
   return (
-    <section className="py-5 bg-light">
+    <section className="py-5 bg-dark">
       <div className="container">
         <h2 className="gold-text text-center mb-4">Book an Appointment</h2>
 

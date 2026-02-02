@@ -14,17 +14,19 @@
 body {
   font-family: 'Instrument Sans', sans-serif;
   background: #fff;
+  background-color: #000;
+  /* color: #e5e5e5; */
 }
 
 /* Gold gradient text */
 .gold-text {
   background: linear-gradient(
     110deg,
-    #8f6b1f 20%,
-    #f8e28a 40%,
+    #f8e28a 20%,
+    #ffe167 40%,
     #ffffff 50%,
-    #f8e28a 60%,
-    #8f6b1f 80%
+    #ffe167 60%,
+    #f8e28a 80%
   );
   background-size: 200% auto;
 
@@ -33,7 +35,7 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
-  animation: shine 11s ease-in-out infinite;
+  animation: shine 7s ease-in-out infinite;
 }
 
 @keyframes shine {
@@ -45,6 +47,13 @@ body {
   }
 }
 
+/* #hamburger {
+  background-color: #c9a24d;
+} */
+
+.gold-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23FFD700' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
 
 /* Buttons */
 .btn-gold {
