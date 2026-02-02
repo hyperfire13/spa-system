@@ -51,7 +51,7 @@ export default function Services({ limit }) {
             <div className="card-body text-center bg-dark">
               <h5 className="gold-text">{service.name}</h5>
 
-              <p className="text-muted">
+              <p className="gold-text">
                 {service.description ?? "No description available."}
               </p>
 

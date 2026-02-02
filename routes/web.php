@@ -8,6 +8,7 @@ use App\Http\Controllers\LandingPageController;
 //     return view('welcome');
 // });
 
+// this will make sure that when the page reloads, laravel will not render UI from its controllers
 Route::get('/{any}', function () {
     return view('welcome');
 })->where('any', '^(?!api).*$');

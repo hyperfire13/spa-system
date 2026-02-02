@@ -10,7 +10,7 @@ export default function Hero() {
           Refined Beauty
         </h1>
 
-        <p className="text-muted mx-auto" style={{ maxWidth: "320px" }}>
+        <p className="gold-text mx-auto" style={{ maxWidth: "320px" }}>
           Experience the pinnacle of luxury spa treatments and
           aesthetic services, thoughtfully curated to enhance
           your natural radiance and inner glow.
