@@ -15,9 +15,9 @@ export default defineConfig({
             ignored: ['**/storage/framework/views/**'],
         },
         server: {
-        host: 'spa.local',
+        host: '127.0.0.1:8000',
         hmr: {
-            host: 'spa.local',
+            host: '127.0.0.1:8000',
         },
     },
     },
