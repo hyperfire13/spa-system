@@ -112,3 +112,27 @@ body {
   transform: translateY(-6px);
   box-shadow: 0 10px 20px rgba(0,0,0,0.08);
 }
+
+.section-soft-dark {
+  background-color: #0d0d0d;
+}
+
+.service-card {
+  background-color: #0d0d0d;
+  color: #e5e5e5;
+  border: 1px solid rgba(201, 162, 77, 0.2);
+  border-radius: 16px;
+}
+
+.hero-logo-large {
+  width: 100%;
+  max-width: 420px; /* desktop cap */
+  height: auto;
+  filter: drop-shadow(0 8px 18px rgba(201, 162, 77, 0.55));
+}
+
+@media (max-width: 768px) {
+  .hero-logo-large {
+    max-width: 260px;
+  }
+}
