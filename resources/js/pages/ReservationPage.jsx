@@ -13,7 +13,7 @@ export default function ReservationPage() {
   return (
     <section className="py-5">
       <div className="container text-center">
-        <h1 className="gold-text mb-4">Book an Appointment</h1>
+        <h1 className="gold-text mb-4 mt-5">Book an Appointment</h1>
         <ReservationForm service={service} />
       </div>
     </section>
