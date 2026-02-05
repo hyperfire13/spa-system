@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ServiceController;
 
 Route::get('/services', [ServiceController::class, 'index']);
+Route::get('/services-with-schedules', [ServiceController::class, 'withSchedules']);
+Route::get('/services/{service}/slots', [ServiceController::class, 'slots']);
+
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('admin/services', ServiceController::class)

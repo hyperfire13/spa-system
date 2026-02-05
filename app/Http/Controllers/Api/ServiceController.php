@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreServiceRequest;
 use App\Models\Service;
 use App\Services\ServiceService;
+use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
@@ -23,6 +24,12 @@ class ServiceController extends Controller
         );
     }
 
+    public function schedules(Service $service)
+    {
+        return response()->json($service->schedules);
+    }
+
+
     public function store(StoreServiceRequest $request)
     {
         return $this->serviceService->store($request->validated());
@@ -39,4 +46,28 @@ class ServiceController extends Controller
         $this->serviceService->delete($service);
         return response()->json(['message' => 'Deleted']);
     }
+
+    public function withSchedules()
+    {
+        return response()->json(
+            $this->serviceService->getWithSchedules()
+        );
+    }
+
+    public function slots(Service $service, Request $request)
+    {
+        $request->validate([
+            'date' => ['required','date']
+        ]);
+
+        return response()->json(
+            $this->serviceService->getAvailableSlots(
+                $service->id,
+                $request->date
+            )
+        );
+    }
+
+
+    
 }

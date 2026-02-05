@@ -15,4 +15,17 @@ class Service extends Model
         'duration_minutes',
         'is_active'
     ];
+
+    public function reservations()
+    {
+        return $this->belongsToMany(Reservation::class);
+    }
+
+    public function schedules()
+    {
+        return $this->hasMany(ServiceSchedule::class);
+    }
+
+    
+
 }
