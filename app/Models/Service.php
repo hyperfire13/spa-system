@@ -18,7 +18,8 @@ class Service extends Model
 
     public function reservations()
     {
-        return $this->belongsToMany(Reservation::class);
+        return $this->belongsToMany(Reservation::class,
+        'reservation_services');
     }
 
     public function schedules()

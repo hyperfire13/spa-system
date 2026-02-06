@@ -7,14 +7,15 @@ export default function ReservationForm({ service }) {
     name: "",
     phone: "",
     date: "",
-    time: "",
   });
-  const [slots, setSlots] = useState([]);
   const [allServices, setAllServices] = useState([]);
   const [availableServices, setAvailableServices] = useState([]);
   const [selectedServices, setSelectedServices] = useState(
     service ? [service] : []
   );
+  const [serviceSlots, setServiceSlots] = useState({});
+  const [slotOptions, setSlotOptions] = useState({});
+
 
   const [loadingServices, setLoadingServices] = useState(true);
   const [error, setError] = useState(null);
@@ -66,18 +67,42 @@ export default function ReservationForm({ service }) {
   }, [form.date, allServices]);
 
   useEffect(() => {
-    if (!form.date || selectedServices.length === 0) {
-      setSlots([]);
+    if (!form.date) {
+      setSlotOptions({});
+      setServiceSlots({});
       return;
     }
 
-    api.get(`/services/${selectedServices[0].id}/slots`, {
-      params: { date: form.date }
-    })
-    .then(res => setSlots(res.data))
-    .catch(() => setSlots([]));
+    // reload slots for all selected services
+    selectedServices.forEach(svc => {
+      loadSlotsForService(svc.id);
+    });
 
   }, [form.date, selectedServices]);
+
+  const loadSlotsForService = async (serviceId) => {
+    if (!form.date) return;
+
+    try {
+      const res = await api.get(`/services/${serviceId}/slots`, {
+        params: { date: form.date }
+      });
+
+      setSlotOptions(prev => ({
+        ...prev,
+        [serviceId]: res.data
+      }));
+
+    } catch (e) {
+      console.error("Slot load failed", e);
+      setSlotOptions(prev => ({
+        ...prev,
+        [serviceId]: []
+      }));
+    }
+  };
+
+
 
 
   /* =========================
@@ -89,12 +114,29 @@ export default function ReservationForm({ service }) {
   };
 
   const toggleService = (svc) => {
-    setSelectedServices(prev =>
-      prev.some(s => s.id === svc.id)
-        ? prev.filter(s => s.id !== svc.id)
-        : [...prev, svc]
-    );
+    setSelectedServices(prev => {
+      const exists = prev.some(s => s.id === svc.id);
+      if (exists) {
+        setServiceSlots(slots => {
+          const copy = { ...slots };
+          delete copy[svc.id];
+          return copy;
+        });
+
+        setSlotOptions(prev => {
+          const copy = { ...prev };
+          delete copy[svc.id];
+          return copy;
+        });
+
+
+        return prev.filter(s => s.id !== svc.id);
+      }
+      return [...prev, svc];
+    });
   };
+
+
 
   /* =========================
      UI
@@ -105,10 +147,11 @@ export default function ReservationForm({ service }) {
       <div className="col-md-6">
         <div className="card bg-dark p-4 rounded-4 shadow-sm">
 
-          <h4 className="gold-text text-center mb-3">
-            Book Appointment
-          </h4>
-
+          <h6 className="gold-text text-center mb-3">
+            Please enter your details and select a date to see available services.
+          </h6>
+          <p className="text-white">{JSON.stringify(selectedServices)}</p>
+          <p className="text-white">{JSON.stringify(serviceSlots)}</p>
           {error && <p className="text-danger text-center">{error}</p>}
 
           <input
@@ -173,18 +216,40 @@ export default function ReservationForm({ service }) {
 
           {/* TIME — next step will be slot-driven */}
 
-          <select
-            className="form-control mt-3"
-            name="time"
-            value={form.time}
-            onChange={handleChange}
-          >
-            <option value="">Select Time Slot</option>
+          {selectedServices.map(svc => (
+            <div key={svc.id} className="mb-3">
 
-            {slots.map(s => (
-              <option key={s} value={s}>{s}</option>
-            ))}
-          </select>
+              <label className="gold-text">
+                {svc.name} — Select Time
+              </label>
+
+              <select
+                className="form-control"
+                disabled={(slotOptions[svc.id] || []).length === 0}
+                value={serviceSlots[svc.id] || ""}
+                onChange={(e) =>
+                  setServiceSlots(prev => ({
+                    ...prev,
+                    [svc.id]: e.target.value
+                  }))
+                }
+              >
+                <option value="">Select Slot</option>
+
+                {(slotOptions[svc.id] || []).map(slot => (
+                  <option key={slot} value={slot}>
+                    {slot}
+                  </option>
+                ))}
+              </select>
+              {(slotOptions[svc.id] || []).length === 0 && (
+                <small className="text-warning">
+                  No slots available for this service on selected date
+                </small>
+              )}
+            </div>
+          ))}
+
         </div>
       </div>
     </div>
