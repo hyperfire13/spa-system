@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Services\ReservationService;
+use App\Http\Requests\StoreReservationRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -13,19 +14,10 @@ class ReservationController extends Controller
         private ReservationService $reservationService
     ) {}
 
-    public function store(Request $request)
+    public function store(StoreReservationRequest $request)
     {
-        $data = $request->validate([
-            'customer_name' => 'required|string|max:120',
-            'customer_phone' => 'required|string|max:40',
-            'reservation_date' => 'required|date',
-            'services' => 'required|array|min:1',
-            'services.*.service_id' => 'required|exists:services,id',
-            'services.*.slot_time' => 'required|date_format:H:i:s',
-        ]);
-
         try {
-            $res = $this->reservationService->create($data);
+            $res = $this->reservationService->create($request->validated());
             return response()->json($res, 201);
         } catch (\Exception $e) {
             return response()->json([

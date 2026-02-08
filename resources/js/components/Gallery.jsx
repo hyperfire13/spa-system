@@ -2,7 +2,7 @@ export default function Gallery() {
   const slides = [
     {
       title: "Spa Interior",
-      image: "https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?auto=format&fit=crop&w=1200&q=80",
+      image: "/images/spa-room-1.webp",
     },
     {
       title: "Massage Room",

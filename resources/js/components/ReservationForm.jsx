@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import api from "../lib/api";
 
 export default function ReservationForm({ service }) {
@@ -15,14 +15,25 @@ export default function ReservationForm({ service }) {
   const [serviceSlots, setServiceSlots] = useState({});
   const [slotOptions, setSlotOptions] = useState({});
   const [loadingServices, setLoadingServices] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState([]);
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(null);
+  const errorRef = useRef(null);
 
 
   /* =========================
      Load services + schedules
   ========================= */
+  // this will auto scroll up when error messages are shown
+  useEffect(() => {
+  if (error && (Array.isArray(error) ? error.length > 0 : true)) {
+    errorRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+  }
+}, [error]);
+
 
   useEffect(() => {
     const load = async () => {
@@ -30,7 +41,7 @@ export default function ReservationForm({ service }) {
         const res = await api.get("/services-with-schedules");
         setAllServices(res.data);
       } catch {
-        setError("Failed to load services.");
+        setError(["Failed to load services."]);
       } finally {
         setLoadingServices(false);
       }
@@ -107,24 +118,22 @@ export default function ReservationForm({ service }) {
   ========================= */
 
   const handleSubmit = async () => {
-    setError(null);
+    setError([]);
     setSuccess(null);
 
     if (!form.name || !form.phone || !form.date) {
-      setError("Please complete required fields");
+      setError(["Please complete required fields"]);
       return;
     }
 
     for (const svc of selectedServices) {
       if (!serviceSlots[svc.id]) {
-        setError(`Select time for ${svc.name}`);
+        setError([`Select time for ${svc.name}`]);
         return;
       }
     }
-
     try {
       setSubmitting(true);
-
       await api.post("/reservations", {
         customer_name: form.name,
         customer_phone: form.phone,
@@ -134,21 +143,27 @@ export default function ReservationForm({ service }) {
           slot_time: serviceSlots[s.id]
         }))
       });
-
+      setError([]);
       setSuccess("Reservation submitted successfully!");
       setSelectedServices([]);
       setServiceSlots({});
       setSlotOptions({});
 
     } catch (e) {
-      setError(
-        e.response?.data?.message ||
-        "Reservation failed. Please try again."
-      );
+      if (e.response?.data?.errors) {
+        // Laravel validation error
+        const all = Object.values(e.response.data.errors).flat();
+        setError(all);
+      } else {
+        setError([
+          e.response?.data?.message ||
+          "Reservation failed. Please try again."
+        ]);
+      }
     } finally {
-      setSubmitting(false);
-    }
-  };
+        setSubmitting(false);
+      }
+    };
 
 
   const handleChange = (e) => {
@@ -195,7 +210,16 @@ export default function ReservationForm({ service }) {
           </h6>
           {/* <p className="text-white">{JSON.stringify(selectedServices)}</p>
           <p className="text-white">{JSON.stringify(serviceSlots)}</p> */}
-          {error && <p className="text-danger text-center">{'Something went wrong'}</p>}
+          {error && (
+            <div ref={errorRef} className="alert alert-danger text-start">
+              <ul className="mb-0 ps-3">
+                {(Array.isArray(error) ? error : [error]).map((msg, i) => (
+                  <li key={i}>* {msg}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           {success && (
             <div className="alert alert-success">
               {success}
