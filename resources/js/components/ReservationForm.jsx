@@ -2,11 +2,12 @@ import { useEffect, useState, useRef } from "react";
 import api from "../lib/api";
 
 export default function ReservationForm({ service }) {
-  const [form, setForm] = useState({
+  const initialForm = {
     name: "",
     phone: "",
     date: "",
-  });
+  };
+  const [form, setForm] = useState(initialForm);
   const [allServices, setAllServices] = useState([]);
   const [availableServices, setAvailableServices] = useState([]);
   const [selectedServices, setSelectedServices] = useState(
@@ -19,20 +20,36 @@ export default function ReservationForm({ service }) {
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(null);
   const errorRef = useRef(null);
+  const [cardAnim, setCardAnim] = useState("");
+
 
 
   /* =========================
      Load services + schedules
   ========================= */
+  useEffect(() => {
+    if (success) {
+      setCardAnim("card-shake");
+      setTimeout(() => setCardAnim(""), 1200);
+    }
+  }, [success]);
+
+  useEffect(() => {
+    if (error && (Array.isArray(error) ? error.length : true)) {
+      setCardAnim("card-shake");
+      setTimeout(() => setCardAnim(""), 600);
+    }
+  }, [error]);
+
   // this will auto scroll up when error messages are shown
   useEffect(() => {
-  if (error && (Array.isArray(error) ? error.length > 0 : true)) {
-    errorRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "center"
-    });
-  }
-}, [error]);
+    if (error && (Array.isArray(error) ? error.length > 0 : true)) {
+      errorRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+    }
+  }, [error]);
 
 
   useEffect(() => {
@@ -148,6 +165,7 @@ export default function ReservationForm({ service }) {
       setSelectedServices([]);
       setServiceSlots({});
       setSlotOptions({});
+      setForm(initialForm);
 
     } catch (e) {
       if (e.response?.data?.errors) {
@@ -199,19 +217,18 @@ export default function ReservationForm({ service }) {
     <div className="row justify-content-center">
       <div className="col-md-6">
         <div className="card bg-dark p-4 rounded-4 shadow-sm">
-          {submitting && (
-            <div className="text-center gold-text mb-3">
-              Processing reservation...
-            </div>
-          )}
-
           <h6 className="gold-text text-center mb-3">
             Please enter your details and select a date to see available services.
           </h6>
           {/* <p className="text-white">{JSON.stringify(selectedServices)}</p>
           <p className="text-white">{JSON.stringify(serviceSlots)}</p> */}
-          {error && (
-            <div ref={errorRef} className="alert alert-danger text-start">
+          {submitting && (
+            <div className="text-center gold-text mb-3">
+              Processing reservation...
+            </div>
+          )}
+          {error.length > 0 && (
+            <div ref={errorRef} className={`alert alert-danger text-start ${cardAnim}`}>
               <ul className="mb-0 ps-3">
                 {(Array.isArray(error) ? error : [error]).map((msg, i) => (
                   <li key={i}>* {msg}</li>
@@ -221,7 +238,7 @@ export default function ReservationForm({ service }) {
           )}
 
           {success && (
-            <div className="alert alert-success">
+            <div className={`alert alert-success ${cardAnim}`}>
               {success}
             </div>
           )}
@@ -235,19 +252,25 @@ export default function ReservationForm({ service }) {
           />
 
           <input
+            type="tel"
+            inputMode="numeric"
+            pattern="[0-9]*"
             className="form-control mb-3"
             placeholder="Phone Number"
             name="phone"
             value={form.phone}
-            onChange={handleChange}
+            onChange={(e) => {
+              const digitsOnly = e.target.value.replace(/\D/g, "");
+              setForm(prev => ({
+                ...prev,
+                phone: digitsOnly
+              }));
+            }}
           />
-
           {/* DATE FIRST */}
-
           <label className="gold-text mb-1">
             Select Date
           </label>
-
           <input
             type="date"
             className="form-control mb-3"
