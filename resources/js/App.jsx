@@ -5,6 +5,13 @@ import Home from "./pages/Home";
 import ServicesPage from "./pages/ServicesPage";
 import ReservationPage from "./pages/ReservationPage";
 
+import { AuthProvider } from "./auth/AuthContext";
+import RequireAdmin from "./auth/RequireAdmin";
+
+import AdminLogin from "./admin/AdminLogin";
+import AdminLayout from "./admin/AdminLayout";
+import AdminDashboard from "./admin/AdminDashboard";
+
 export default function App() {
   return (
     <>
@@ -15,6 +22,20 @@ export default function App() {
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/reservation" element={<ReservationPage />} />
       </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin"
+            element={
+              <RequireAdmin>
+                <AdminLayout />
+              </RequireAdmin>
+            }
+          >
+          <Route index element={<AdminDashboard />} />
+          </Route>
+        </Routes>
+      </AuthProvider>
     </>
   );
 }

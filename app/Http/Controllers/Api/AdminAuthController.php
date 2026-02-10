@@ -20,9 +20,10 @@ class AdminAuthController extends Controller
                 'message' => 'Invalid credentials'
             ], 401);
         }
-
         $user = $request->user();
-
+        if (!$user->is_admin) {
+            abort(403, 'Not an admin account');
+        }
         $token = $user->createToken('admin-token')->plainTextToken;
 
         return response()->json([
