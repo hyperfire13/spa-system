@@ -55,4 +55,27 @@ class ReservationService
             return $reservation->load('services');
         });
     }
+
+    public function getAdminList(array $filters = [])
+    {
+        $q = Reservation::with(['services'])
+            ->latest();
+
+        if (!empty($filters['status'])) {
+            $q->where('status', $filters['status']);
+        }
+
+        if (!empty($filters['search'])) {
+            $s = $filters['search'];
+
+            $q->where(function ($w) use ($s) {
+                $w->where('customer_name', 'like', "%{$s}%")
+                  ->orWhere('customer_phone', 'like', "%{$s}%");
+            });
+        }
+
+        return $q->paginate(
+            $filters['per_page'] ?? 15
+        );
+    }
 }

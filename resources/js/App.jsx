@@ -11,6 +11,8 @@ import RequireAdmin from "./auth/RequireAdmin";
 import AdminLogin from "./admin/AdminLogin";
 import AdminLayout from "./admin/AdminLayout";
 import AdminDashboard from "./admin/AdminDashboard";
+import AdminReservations from "./admin/AdminReservations";
+
 
 export default function App() {
   return (
@@ -25,15 +27,15 @@ export default function App() {
       <AuthProvider>
         <Routes>
           <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin"
-            element={
-              <RequireAdmin>
-                <AdminLayout />
-              </RequireAdmin>
-            }
-          >
-          <Route index element={<AdminDashboard />} />
-          </Route>
+          <Route path="/admin"element={
+                <RequireAdmin>
+                  <AdminLayout />
+                </RequireAdmin>
+              }
+            >
+              <Route index element={<AdminDashboard />} />
+              <Route path="reservations" element={<AdminReservations />} />
+            </Route>
         </Routes>
       </AuthProvider>
     </>

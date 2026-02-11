@@ -22,6 +22,10 @@ Route::middleware(['auth:sanctum','throttle:admin-write'])->group(function () {
     Route::get('/admin/me', [AdminAuthController::class, 'me']);
     Route::apiResource('admin/services', ServiceController::class)
         ->except(['index','show']);
+    Route::get('/admin/reservations',
+        [ReservationController::class, 'adminIndex']
+    );
+
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

@@ -25,4 +25,16 @@ class ReservationController extends Controller
             ], 422);
         }
     }
+
+    public function adminIndex(Request $request)
+    {
+        $data = $this->reservationService->getAdminList([
+            'status'   => $request->status,
+            'search'   => $request->search,
+            'per_page' => $request->per_page,
+        ]);
+
+        return response()->json($data);
+    }
+
 }
