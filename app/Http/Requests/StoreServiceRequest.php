@@ -6,34 +6,30 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreServiceRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        return true; // already protected by sanctum + admin
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'price' => 'required|numeric|min:0',
-            'duration_minutes' => 'nullable|integer|min:0',
+            'name' => ['required','string','max:120'],
+            'description' => ['nullable','string','max:500'],
+            'price' => ['required','numeric','min:0'],
+            'duration_minutes' => ['required','integer','min:5','max:480'],
+            'is_active' => ['required','boolean'],
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'name.required' => 'Service name is required.',
-            'price.required' => 'Price is required.',
+            'price.required' => 'Service price is required.',
+            'price.numeric' => 'Price must be a valid number.',
+            'duration_minutes.required' => 'Duration is required.',
+            'duration_minutes.min' => 'Minimum duration is 5 minutes.',
         ];
     }
 }

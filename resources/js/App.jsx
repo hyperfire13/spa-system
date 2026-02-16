@@ -12,6 +12,7 @@ import AdminLogin from "./admin/AdminLogin";
 import AdminLayout from "./admin/AdminLayout";
 import AdminDashboard from "./admin/AdminDashboard";
 import AdminReservations from "./admin/AdminReservations";
+import AdminServices from "./admin/AdminServices";
 
 
 export default function App() {
@@ -28,14 +29,15 @@ export default function App() {
         <Routes>
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin"element={
-                <RequireAdmin>
-                  <AdminLayout />
-                </RequireAdmin>
-              }
-            >
+              <RequireAdmin>
+                <AdminLayout />
+              </RequireAdmin>
+            }
+          >
               <Route index element={<AdminDashboard />} />
               <Route path="reservations" element={<AdminReservations />} />
-            </Route>
+              <Route path="services" element={<AdminServices />} />
+          </Route>
         </Routes>
       </AuthProvider>
     </>
