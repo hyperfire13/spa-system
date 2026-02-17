@@ -13,7 +13,9 @@ class Service extends Model
         'description',
         'price',
         'duration_minutes',
-        'is_active'
+        'is_active',
+        'image_url',
+        'updated_at'
     ];
 
     public function reservations()
@@ -26,6 +28,11 @@ class Service extends Model
     {
         return $this->hasMany(ServiceSchedule::class);
     }
+
+    protected $casts = [
+        'is_active' => 'boolean',
+        'price' => 'decimal:2',
+    ];
 
     
 

@@ -4,16 +4,26 @@ import Loading from "../components/Loading";
 
 export default function AdminServices() {
 
+  const emptySchedule = {
+    day_of_week: 1,
+    start_time: "09:00",
+    end_time: "18:00",
+    slot_minutes: 60,
+    capacity_per_slot: 1
+  };
+
   const emptyForm = {
     name: "",
     description: "",
     price: "",
     duration_minutes: 60,
-    is_active: true
+    is_active: true,
+    schedules:[{...emptySchedule}]
   };
 
   const [services,setServices] = useState([]);
-  const [loading,setLoading] = useState(true);
+  const [loading,setLoading] = useState(false);
+  const [initialized,setInitialized] = useState(false);
   const [saving,setSaving] = useState(false);
   const [error,setError] = useState([]);
   const [showForm,setShowForm] = useState(false);
@@ -21,6 +31,22 @@ export default function AdminServices() {
   const [form,setForm] = useState(emptyForm);
   const [page,setPage] = useState(1);
   const [lastPage,setLastPage] = useState(1);
+
+  const addSchedule = ()=>{
+    setForm(f=>({...f,schedules:[...f.schedules,{...emptySchedule}]}));
+  };
+
+  const removeSchedule = i=>{
+    setForm(f=>({...f,schedules:f.schedules.filter((_,x)=>x!==i)}));
+  };
+
+  const updateSchedule = (i,key,value)=>{
+    setForm(f=>{
+      const copy=[...f.schedules];
+      copy[i]={...copy[i],[key]:value};
+      return {...f,schedules:copy};
+    });
+  };
 
 
   /* ================= LOAD ================= */
@@ -32,13 +58,14 @@ export default function AdminServices() {
       const res = await api.get("/admin/services",{
         params:{ page:p }
       });
-
+      console.log(res.data.last_page + 'xx');
       setServices(res.data.data);
-      setPage(res.data.meta.current_page);
-      setLastPage(res.data.meta.last_page);
+      setPage(res.data.current_page);
+      setLastPage(res.data.last_page);
 
-    }catch{
+    }catch(e){
       setError(["Failed to load services"]);
+      alert(e)
     }finally{
       setLoading(false);
     }
@@ -212,8 +239,61 @@ export default function AdminServices() {
                     <label className="form-check-label">Active</label>
                   </div>
 
-                </div>
+                  <h6 className="gold-text mt-3">Schedules</h6>
 
+                  {form.schedules.map((s,i)=>(
+                    <div key={i} className="border rounded p-2 mb-2">
+
+                      <div className="row g-2">
+
+                        <div className="col-6">
+                          <select className="form-select"
+                            value={s.day_of_week}
+                            onChange={e=>updateSchedule(i,'day_of_week',e.target.value)}>
+                            {["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].map((d,idx)=>(
+                              <option key={idx} value={idx}>{d}</option>
+                            ))}
+                          </select>
+                        </div>
+
+                        <div className="col-6">
+                          <button type="button" className="btn btn-sm btn-danger w-100"
+                            onClick={()=>removeSchedule(i)}>Remove</button>
+                        </div>
+
+                        <div className="col-6">
+                          <input type="time" className="form-control"
+                            value={s.start_time}
+                            onChange={e=>updateSchedule(i,'start_time',e.target.value)}/>
+                        </div>
+
+                        <div className="col-6">
+                          <input type="time" className="form-control"
+                            value={s.end_time}
+                            onChange={e=>updateSchedule(i,'end_time',e.target.value)}/>
+                        </div>
+
+                        <div className="col-6">
+                          <input type="number" className="form-control" placeholder="Slot Minutes"
+                            value={s.slot_minutes}
+                            onChange={e=>updateSchedule(i,'slot_minutes',e.target.value)}/>
+                        </div>
+
+                        <div className="col-6">
+                          <input type="number" className="form-control" placeholder="Capacity"
+                            value={s.capacity_per_slot}
+                            onChange={e=>updateSchedule(i,'capacity_per_slot',e.target.value)}/>
+                        </div>
+
+                      </div>
+                    </div>
+                  ))}
+
+                  <button type="button" className="btn btn-outline-warning w-100"
+                    onClick={addSchedule}>
+                    + Add Schedule
+                  </button>
+                </div>
                 <div className="modal-footer">
                   <button className="btn btn-secondary" onClick={closeForm}>Cancel</button>
                   <button className="btn btn-warning" disabled={saving}>
