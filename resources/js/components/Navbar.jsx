@@ -1,14 +1,19 @@
 import { Link } from "react-router-dom";
 import { useRef } from "react";
+import { useAuth } from "../auth/AuthContext";
 
 export default function Navbar() {
   const navRef = useRef(null);
-
+  const { admin } = useAuth();
   const closeMenu = () => {
     if (navRef.current.classList.contains("show")) {
       navRef.current.classList.remove("show");
     }
   };
+
+  if (admin) {
+    return null; // Don't show navbar if admin is logged in
+  } 
 
   return (
     <nav className="navbar navbar-expand-lg bg-dark fixed-top shadow-sm">

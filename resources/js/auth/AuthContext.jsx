@@ -12,6 +12,7 @@ export function AuthProvider({ children }) {
     const token = localStorage.getItem("admin_token");
 
     if (!token) {
+      // alert("No admin token found. Please login.");
       setLoading(false);
       return;
     }

@@ -18,28 +18,28 @@ import AdminServices from "./admin/AdminServices";
 export default function App() {
   return (
     <>
-      <Navbar />
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/services" element={<ServicesPage />} />
-        <Route path="/reservation" element={<ReservationPage />} />
-      </Routes>
       <AuthProvider>
+        <Navbar />
         <Routes>
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin"element={
-              <RequireAdmin>
-                <AdminLayout />
-              </RequireAdmin>
-            }
-          >
-              <Route index element={<AdminDashboard />} />
-              <Route path="reservations" element={<AdminReservations />} />
-              <Route path="services" element={<AdminServices />} />
-          </Route>
+          <Route path="/" element={<Home />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/reservation" element={<ReservationPage />} />
         </Routes>
-      </AuthProvider>
+        
+          <Routes>
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin"element={
+                <RequireAdmin>
+                  <AdminLayout />
+                </RequireAdmin>
+              }
+            >
+                <Route index element={<AdminDashboard />} />
+                <Route path="reservations" element={<AdminReservations />} />
+                <Route path="services" element={<AdminServices />} />
+            </Route>
+          </Routes>
+        </AuthProvider>
     </>
   );
 }
