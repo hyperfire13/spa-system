@@ -216,7 +216,7 @@ export default function ReservationForm({ service }) {
   return (
     <div className="row justify-content-center">
       <div className="col-md-6">
-        <div className="card bg-dark p-4 rounded-4 shadow-sm">
+        <div className="card  p-4 rounded-4 shadow-sm">
           <h6 className="gold-text text-center mb-3">
             Please enter your details and select a date to see available services.
           </h6>

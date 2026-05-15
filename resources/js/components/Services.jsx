@@ -52,7 +52,7 @@ export default function Services({ limit }) {
               }}
             />
 
-            <div className="card-body text-center bg-dark d-flex flex-column">
+            <div className="card-body text-center  d-flex flex-column">
               <h5 className="gold-text">{service.name}</h5>
 
               <p className="gold-text">

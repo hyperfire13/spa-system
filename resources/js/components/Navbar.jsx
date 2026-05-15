@@ -16,7 +16,7 @@ export default function Navbar() {
   } 
 
   return (
-    <nav className="navbar navbar-expand-lg bg-dark fixed-top shadow-sm">
+    <nav className="navbar navbar-expand-lg  fixed-top shadow-sm">
       <div className="container">
         <span className="navbar-brand fw-bold gold-text">
           SPA BY MJ

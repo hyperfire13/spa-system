@@ -14,7 +14,7 @@
 body {
   font-family: 'Instrument Sans', sans-serif;
   background: #fff;
-  background-color: #000;
+  background-color: #ffffff;
   /* color: #e5e5e5; */
 }
 
@@ -114,11 +114,11 @@ body {
 }
 
 .section-soft-dark {
-  background-color: #0d0d0d;
+  background-color: #ffffff;
 }
 
 .service-card {
-  background-color: #0d0d0d;
+  background-color: #ffffff;
   color: #e5e5e5;
   border: 1px solid rgba(201, 162, 77, 0.2);
   border-radius: 16px;

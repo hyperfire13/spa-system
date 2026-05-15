@@ -23,9 +23,9 @@ export default function Home() {
           View All Services
         </Link>
       </section>
-      <section className="py-5 bg-dark">
+      <section className="py-5 ">
         <div className="container text-center">
-          <h2 className="gold-text mb-4">Why Choose Us</h2>
+          <h2 className="gold-text mb-4">Why Choose Usxx</h2>
           <div className="row g-4">
             <div className="col-md-4">
               <h5>Expert Therapists</h5>
