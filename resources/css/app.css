@@ -18,8 +18,8 @@ body {
   /* color: #e5e5e5; */
 }
 
-/* Gold gradient text */
-.gold-text {
+/* Gold gradient text with animation */
+/* .gold-text {
   background: linear-gradient(
     110deg,
     #f8e28a 20%,
@@ -36,6 +36,10 @@ body {
   -webkit-text-fill-color: transparent;
 
   animation: shine 7s ease-in-out infinite;
+} */
+
+.gold-text {
+
 }
 
 @keyframes shine {

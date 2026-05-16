@@ -37,43 +37,66 @@ export default function Services({ limit }) {
 
   return (
     <div className="row g-4">
-      {services.map(service => (
-        <div className="col-md-4" key={service.id}>
-          <div className="card service-card h-100 overflow-hidden">
+  {services.map(service => (
+    <div className="col-md-4" key={service.id}>
 
-            <img
-              src={service.image_url || DEFAULT_IMAGE}
-              alt={service.name}
-              className="card-img-top"
-              style={{ height: "200px", objectFit: "cover" }}
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = DEFAULT_IMAGE;
+      <div className="card service-card border-0 overflow-hidden">
+
+        <div
+          className="position-relative"
+          style={{
+            height: "120px",
+            background: "#F4F5EF"
+          }}
+        >
+
+          {/* IMAGE */}
+          <img
+            src={service.image_url || DEFAULT_IMAGE}
+            alt={service.name}
+            className="w-100 h-100"
+            style={{
+              objectFit: "cover",
+              opacity: 0.28,
+              filter: "grayscale(20%) sepia(15%)"
+            }}
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = DEFAULT_IMAGE;
+            }}
+          />
+
+          {/* LIGHT OVERLAY */}
+          <div
+            className="position-absolute top-0 start-0 w-100 h-100"
+            style={{
+              background: "rgba(244,245,239,0.55)"
+            }}
+          />
+
+          {/* CENTER TEXT */}
+          <div
+            className="position-absolute top-50 start-50 translate-middle text-center w-100 px-2"
+          >
+            <h6
+              className="mb-0 fw-normal"
+              style={{
+                color: "#8F8B7E",
+                letterSpacing: "0.5px",
+                fontFamily: "serif",
+                fontSize: "18px"
               }}
-            />
-
-            <div className="card-body text-center  d-flex flex-column">
-              <h5 className="gold-text">{service.name}</h5>
-
-              <p className="gold-text">
-                {service.description ?? "No description available."}
-              </p>
-
-              <strong className="gold-text mb-3">
-                ₱{service.price ?? "0.00"}
-              </strong>
-
-              <button
-                className="btn btn-gold mt-auto"
-                onClick={() => handleBook(service)}
-              >
-                Book This Service
-              </button>
-            </div>
-
+            >
+              {service.name}
+            </h6>
           </div>
+
         </div>
-      ))}
+
+      </div>
+
     </div>
+  ))}
+</div>
   );
 }

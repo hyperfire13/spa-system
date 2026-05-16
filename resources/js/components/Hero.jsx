@@ -1,6 +1,6 @@
 export default function Hero() {
   return (
-    <section className="hero-section mt-5 mb-5">
+    <section className="hero-section mt-5 ">
       <div className="container">
         <div className="row align-items-center fade-up">
           {/* LEFT: TEXT */}

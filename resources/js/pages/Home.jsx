@@ -10,7 +10,7 @@ export default function Home() {
     <>
     <div className="container">
       <Hero />
-      <Gallery />
+      {/* <Gallery /> */}
       <section className="py-5 text-center">
         <h2 className="gold-text mb-3">Our Services</h2>
         <p className="text-muted">
