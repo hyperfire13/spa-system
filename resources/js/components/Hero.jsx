@@ -24,7 +24,7 @@ export default function Hero() {
               Welcome to Spa by MJ, a restorative haven where holistic healing meets refined elegance. Immerse yourself in a space of tranquility, designed to soothe the soul and awaken the light within. <br/><br/>
               Experience bespoke rituals crafted for balance and serenity.
             </p>
-            <button className="btn btn-outline-warning mt-3">
+            <button className="btn btn-outline-warning mt-3 mb-3">
               BEGIN YOUR JOURNEY.
             </button>
 
@@ -38,7 +38,7 @@ export default function Hero() {
             </button> */}
           </div>
            {/* RIGHT: LOGO (BIG) */}
-          <div className="col-md-6 d-flex justify-content-center">
+          <div className="col-md-6 d-flex justify-content-center mb-5">
             <img
               src="/images/spa-logo.webp"
               alt="Spa Logo"

@@ -13,10 +13,10 @@ export default function Navbar() {
 
   if (admin) {
     return null; // Don't show navbar if admin is logged in
-  } 
+  }
 
   return (
-    <nav className="navbar navbar-expand-lg  fixed-top shadow-sm">
+    <nav className="navbar navbar-expand-lg bg-white  fixed-top shadow-sm">
       <div className="container">
         <span className="navbar-brand fw-bold gold-text">
           SPA BY MJ
