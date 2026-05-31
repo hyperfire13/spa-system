@@ -40,7 +40,7 @@ export default function Hero() {
            {/* RIGHT: LOGO (BIG) */}
           <div className="col-md-6 d-flex justify-content-center mb-5">
             <img
-              src="/images/spa-logo.webp"
+              src="/images/white-logo.jpg"
               alt="Spa Logo"
               className="hero-logo-large"
             />

@@ -10,8 +10,8 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
         <title>Spa System</title>
-        <link rel="icon" href="/images/spa-logo.webp">
-        <link rel="apple-touch-icon" href="/images/spa-logo.webp">
+        <link rel="icon" href="/images/white-logo.jpg">
+        <link rel="apple-touch-icon" href="/images/white-logo.jpg">
 
         @viteReactRefresh
         @vite('resources/js/main.jsx')
