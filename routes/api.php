@@ -9,6 +9,10 @@ use App\Http\Controllers\Api\AdminAuthController;
 Route::middleware('throttle:api')->group(function () {
     Route::get('/services', [ServiceController::class, 'index']);
     Route::get('/services-with-schedules', [ServiceController::class, 'withSchedules']);
+    Route::get(
+    '/services/curated-skincare',
+    [ServiceController::class, 'curatedSkincare']
+);
 });
 Route::get('/services/{service}/slots', [ServiceController::class, 'slots'])->middleware('throttle:slot-query');
 Route::post('/reservations', [ReservationController::class, 'store'])->middleware('throttle:reservation');

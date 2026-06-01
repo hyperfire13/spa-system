@@ -21,12 +21,21 @@ class ServiceController extends Controller
         $this->adminServiceService = $adminServiceService;
     }
 
+
+
     public function adminIndex(Request $request)
     {
         return response()->json(
             $this->adminServiceService->list([
                 'per_page' => $request->per_page
             ])
+        );
+    }
+
+    public function curatedSkincare()
+    {
+        return response()->json(
+            $this->serviceService->getCuratedSkincareServices()
         );
     }
 
@@ -90,5 +99,5 @@ class ServiceController extends Controller
     }
 
 
-    
+
 }

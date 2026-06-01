@@ -1,61 +1,79 @@
 export default function Gallery() {
   const slides = [
     {
-      title: "Spa Interior",
-      image: "/images/spa-room-1.webp",
+      title: "",
+      image: "/images/promo-pic-2.PNG",
     },
     {
-      title: "Massage Room",
-      image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1200&q=80",
+      title: "",
+      image: "/images/mjspa-promo-pic.PNG",
     },
     {
-      title: "Relax Area",
-      image: "https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=1200&q=80",
+      title: "",
+      image: "/images/promo-pic-3.PNG",
     },
   ];
 
   const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1200&q=80";
 
   return (
-    <section className="container-fluid  py-5 px-0">
-      <div className="container">
-        <div
-          id="spaGallery"
-          className="carousel slide"
-          data-bs-ride="carousel"
-          data-bs-interval="2500"
-        >
-          <div className="carousel-inner rounded-4 shadow-sm">
+    <section className="container-fluid  px-0">
+        <div className="container">
 
-            {slides.map((slide, i) => (
-              <div className={`carousel-item ${i === 0 ? "active" : ""}`} key={i}>
-                <div className="position-relative">
+            <div
+            className="mx-auto"
+            style={{
+                maxWidth: "900px"
+            }}
+            >
+            <div
+                id="spaGallery"
+                className="carousel slide"
+                data-bs-ride="carousel"
+                data-bs-interval="2500"
+            >
+                <div className="carousel-inner rounded-4 shadow-sm">
 
-                  <img
-                    src={slide.image}
-                    alt={slide.title}
-                    className="d-block w-100"
-                    style={{ height: "300px", objectFit: "cover" }}
-                    loading="lazy"
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src = FALLBACK_IMAGE;
-                    }}
-                  />
+                {slides.map((slide, i) => (
+                    <div
+                    className={`carousel-item ${i === 0 ? "active" : ""}`}
+                    key={i}
+                    >
+                    <div
+                        className="position-relative"
+                        style={{
+                        aspectRatio: "3 / 1"
+                        }}
+                    >
 
-                  {/* Overlay */}
-                  <div className="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center"
-                      style={{ background: "rgba(0,0,0,0.35)" }}>
-                    <h3 className="gold-text">{slide.title}</h3>
-                  </div>
+                        <img
+                        src={slide.image}
+                        alt={slide.title}
+                        className="w-100 h-100"
+                        style={{
+                            objectFit: "cover"
+                        }}
+                        loading="lazy"
+                        onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = FALLBACK_IMAGE;
+                        }}
+                        />
+
+                        <div
+                        className="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center"
+
+                        >
+                        <h3 className="gold-text">{slide.title}</h3>
+                        </div>
+
+                    </div>
+                    </div>
+                ))}
 
                 </div>
-              </div>
-            ))}
 
-          </div>
-
-          {/* Controls */}
+                 {/* Controls */}
           <button
             className="carousel-control-prev"
             type="button"
@@ -73,8 +91,11 @@ export default function Gallery() {
           >
             <span className="carousel-control-next-icon custom-carousel-icon"></span>
           </button>
+
+            </div>
+            </div>
+
         </div>
-      </div>
     </section>
   );
 }

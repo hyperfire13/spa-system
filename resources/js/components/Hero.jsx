@@ -1,6 +1,6 @@
 export default function Hero() {
   return (
-    <section className="hero-section mt-5 ">
+    <section className="hero-section mt-1">
       <div className="container">
         <div className="row align-items-center fade-up">
           {/* LEFT: TEXT */}
@@ -20,12 +20,12 @@ export default function Hero() {
             <h3 className="fw-semibold">
               A SANCTUARY FOR THE SENSES.<br/>
             </h3>
-            <p className="fw-normal" style={{ maxWidth: "420px" }}>
+            <p className="fw-semibold fs-6" style={{ maxWidth: "420px" }}>
               Welcome to Spa by MJ, a restorative haven where holistic healing meets refined elegance. Immerse yourself in a space of tranquility, designed to soothe the soul and awaken the light within. <br/><br/>
               Experience bespoke rituals crafted for balance and serenity.
             </p>
-            <button className="btn btn-outline-warning mt-3 mb-3">
-              BEGIN YOUR JOURNEY.
+            <button className="gold-text btn btn-outline-warning mt-3 mb-3">
+              <b>BEGIN YOUR JOURNEY.</b>
             </button>
 
             {/* <p className="gold-text" style={{ maxWidth: "420px" }}>

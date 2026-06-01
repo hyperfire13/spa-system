@@ -2,7 +2,7 @@ export default function ContactSection() {
   return (
     <section className="container-fluid section-soft-dark py-5 px-0">
       <div className="container">
-        <div className="text-center mb-4">
+        <div className="text-center mb-4 fs-5">
           <h2 className="gold-text">Contact Us</h2>
           <p className="gold-text">
             We’d love to hear from you. Visit us or call to book your session.
@@ -12,7 +12,7 @@ export default function ContactSection() {
         <div className="row justify-content-center g-4">
 
           {/* Address */}
-          <div className="col-md-5">
+          <div className="col-md-5 fs-5">
             <div className="card service-card h-100 p-4 text-center">
               <h5 className="gold-text mb-3">Our Location</h5>
               <p className="gold-text mb-1">
@@ -28,7 +28,7 @@ export default function ContactSection() {
           </div>
 
           {/* Contact */}
-          <div className="col-md-5">
+          <div className="col-md-5 fs-5">
             <div className="card service-card h-100 p-4 text-center">
               <h5 className="gold-text mb-3">Contact Info</h5>
               <p className="gold-text mb-2">

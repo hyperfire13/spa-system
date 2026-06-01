@@ -62,7 +62,7 @@ export default function Services({ limit }) {
                 <div className="card-body text-center d-flex flex-column p-4">
                     {/* TITLE */}
                     <h3
-                        className="mb-2"
+                        className="mb-2 gold-text"
                         style={{
                         color: "#8F8B7E",
                         letterSpacing: "1.5px",
@@ -155,7 +155,7 @@ export default function Services({ limit }) {
                     className="position-absolute top-50 start-50 translate-middle text-center w-100 px-2"
                     >
                     <h3
-                        className="mb-0 fw-semibold"
+                        className="mb-0 fw-semibold gold-text"
                         style={{
                         color: "#8F8B7E",
                         letterSpacing: "1.5px",

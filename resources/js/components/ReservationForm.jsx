@@ -217,7 +217,7 @@ export default function ReservationForm({ service }) {
     <div className="row justify-content-center">
       <div className="col-md-6">
         <div className="card  p-4 rounded-4 shadow-sm">
-          <h6 className="gold-text text-center mb-3">
+          <h6 className="gold-text text-center mb-3 fs-5">
             Please enter your details and select a date to see available services.
           </h6>
           {/* <p className="text-white">{JSON.stringify(selectedServices)}</p>
@@ -268,7 +268,7 @@ export default function ReservationForm({ service }) {
             }}
           />
           {/* DATE FIRST */}
-          <label className="gold-text mb-1">
+          <label className="gold-text mb-1 fs-5">
             Select Date
           </label>
           <input
@@ -281,7 +281,7 @@ export default function ReservationForm({ service }) {
 
           {/* SERVICES BASED ON DATE */}
 
-          <h6 className="gold-text">
+          <h6 className="gold-text fs-5">
             Available Services
           </h6>
 
@@ -293,7 +293,7 @@ export default function ReservationForm({ service }) {
             </p>
           )}
 
-          <div style={{ maxHeight: 180, overflowY: "auto" }} className="mb-4">
+          <div style={{ maxHeight: 180, overflowY: "auto" }} className="mb-4 fs-5">
             {availableServices.map(svc => (
               <div key={svc.id} className="form-check text-start">
                 <input
@@ -315,11 +315,11 @@ export default function ReservationForm({ service }) {
             <div
               key={svc.id}
               className="row align-items-center g-2 mb-3 p-2 rounded-3"
-              style={{ background: "#111" }}
+
             >
 
               {/* LEFT — SERVICE INFO */}
-              <div className="col-12 col-md-6">
+              <div className="col-12 col-md-6 fs-5">
 
                 <div className="gold-text fw-semibold">
                   {svc.name}

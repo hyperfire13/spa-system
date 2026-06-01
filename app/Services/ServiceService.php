@@ -8,6 +8,18 @@ use App\Models\Reservation;
 
 class ServiceService
 {
+    public function getCuratedSkincareServices()
+    {
+        return Service::query()
+            ->where(function ($query) {
+                $query->where('description', 'like', '%FACIAL%')
+                    ->orWhere('description', 'like', '%SKIN%');
+            })
+            ->where('is_active', true)
+            ->orderBy('name')
+            ->limit(15)
+            ->get();
+    }
     public function getActiveServices()
     {
         return Service::where('is_active', true)->orderBy('name')->get();

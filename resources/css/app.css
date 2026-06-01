@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap');
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
@@ -39,7 +39,8 @@ body {
 } */
 
 .gold-text {
-
+    color: #786905;
+    font-family: 'Cormorant Garamond', serif;
 }
 
 @keyframes shine {
@@ -81,12 +82,14 @@ body {
   text-align: center;
   padding: 2rem;
   margin-bottom: -5rem;
+  font-family: 'Cormorant Garamond', serif;
 }
 
 .hero-subtitle {
   letter-spacing: 3px;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   color: #bfa24a;
+  font-family: 'Cormorant Garamond', serif;
 }
 
 /* Animations */
