@@ -17,7 +17,7 @@ export default function Gallery() {
   const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1200&q=80";
 
   return (
-    <section className="container-fluid  px-0">
+    <section className="container-fluid mt-5 px-0">
         <div className="container">
 
             <div

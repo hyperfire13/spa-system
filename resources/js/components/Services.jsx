@@ -43,7 +43,7 @@ export default function Services({ limit }) {
         {limit === undefined ? (
 
         /* FULL CARD LAYOUT */
-        <div className="row g-4">
+        <div className="row g-4 ">
             {services.map(service => (
             <div className="col-md-4" key={service.id}>
                 <div className="card service-card h-100 overflow-hidden">
@@ -64,7 +64,6 @@ export default function Services({ limit }) {
                     <h3
                         className="mb-2 gold-text"
                         style={{
-                        color: "#8F8B7E",
                         letterSpacing: "1.5px",
                         fontFamily: "serif",
                         fontSize: "clamp(22px, 2vw, 34px)",
