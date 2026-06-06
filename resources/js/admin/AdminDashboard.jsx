@@ -75,7 +75,7 @@ export default function AdminDashboard() {
       {/* ================= HEADER ================= */}
 
       <div className="card bg-dark p-4 rounded-4 mb-4 shadow-sm">
-        <h3 className="gold-text mb-1">
+        <h3 className="text-warning mb-1">
           Welcome back, {admin?.name}
         </h3>
 
@@ -111,7 +111,7 @@ export default function AdminDashboard() {
       {/* ================= QUICK ACTIONS ================= */}
 
       <div className="card bg-dark p-4 rounded-4 shadow-sm">
-        <h5 className="gold-text mb-3">
+        <h5 className="text-warning mb-3">
           Quick Actions
         </h5>
 
@@ -159,7 +159,7 @@ function StatCard({ title, value, subtitle }) {
           {title}
         </div>
 
-        <div className="gold-text fs-3 fw-semibold">
+        <div className="text-warning fs-3 fw-semibold">
           {value}
         </div>
 

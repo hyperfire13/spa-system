@@ -210,6 +210,21 @@ export default function ReservationForm({ service }) {
       return [...prev, svc];
     });
   };
+  const formatTime = (time) => {
+    if (!time) return "";
+
+    const [hour, minute] = time.split(":");
+
+    const date = new Date();
+    date.setHours(hour);
+    date.setMinutes(minute);
+
+    return date.toLocaleTimeString([], {
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true
+    });
+    };
   /* =========================
      UI
   ========================= */
@@ -328,7 +343,7 @@ export default function ReservationForm({ service }) {
                 <div className="small gold-text opacity-75">
                   Duration: {svc.duration_minutes ?? "—"} min
                   &nbsp;•&nbsp;
-                  ₱{svc.price}
+                  £{svc.price}
                 </div>
 
               </div>
@@ -351,7 +366,7 @@ export default function ReservationForm({ service }) {
 
                   {(slotOptions[svc.id] || []).map(slot => (
                     <option key={slot} value={slot}>
-                      {slot}
+                        {formatTime(slot)}
                     </option>
                   ))}
                 </select>

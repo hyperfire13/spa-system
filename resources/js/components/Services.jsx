@@ -11,6 +11,7 @@ export default function Services({ limit }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const [selectedCategory, setSelectedCategory] = useState("ALL");
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -33,6 +34,31 @@ export default function Services({ limit }) {
 
   if (loading) return <Loading />;
   if (error) return <ErrorMessage message={error} />;
+  const categories = [
+    "ALL",
+    ...new Set(
+        services.map(service => service.description)
+    )
+  ];
+
+  const filteredServices =
+    selectedCategory === "ALL"
+      ? services
+      : services.filter(
+          service => service.description === selectedCategory
+        );
+
+  const groupedServices = filteredServices.reduce((acc, service) => {
+    const key = service.description || "OTHER";
+
+    if (!acc[key]) {
+      acc[key] = [];
+    }
+
+    acc[key].push(service);
+
+    return acc;
+  }, {});
 
   const handleBook = (service) => {
     navigate("/reservation", { state: { service } });
@@ -43,72 +69,141 @@ export default function Services({ limit }) {
         {limit === undefined ? (
 
         /* FULL CARD LAYOUT */
-        <div className="row g-4 ">
-            {services.map(service => (
-            <div className="col-md-4" key={service.id}>
-                <div className="card service-card h-100 overflow-hidden">
-
-                <img
-                    src={service.image_url || DEFAULT_IMAGE}
-                    alt={service.name}
-                    className="card-img-top"
-                    style={{ height: "200px", objectFit: "cover" }}
-                    onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = DEFAULT_IMAGE;
-                    }}
-                />
-
-                <div className="card-body text-center d-flex flex-column p-4">
-                    {/* TITLE */}
-                    <h3
-                        className="mb-2 gold-text"
-                        style={{
-                        letterSpacing: "1.5px",
-                        fontFamily: "serif",
-                        fontSize: "clamp(22px, 2vw, 34px)",
-                        textTransform: "uppercase",
-                        textShadow: "0 2px 10px rgba(0,0,0,0.08)",
-                        lineHeight: "1.2"
-                        }}
-                    >
-                        {service.name}
-                    </h3>
-                    {/* DESCRIPTION */}
-                    <p
-                        className="mb-4"
-                        style={{
-                        color: "#8F8B7E",
-                        fontFamily: "sans-serif",
-                        fontSize: "15px",
-                        fontWeight: "300",
-                        lineHeight: "1.7",
-                        opacity: 0.9
-                        }}
-                    >
-                        {service.description ?? "Luxury spa experience crafted for relaxation and wellness."}
-                    </p>
-                    {/* PRICE */}
-                    <strong
-                        style={{
-                        color: "#8F8B7E",
-                        fontSize: "22px",
-                        fontWeight: "600",
-                        letterSpacing: "1px"
-                        }}
-                    >
-                        £{service.price ?? "0.00"}
-                    </strong>
-                    <button
-                        className="btn btn-gold mt-auto"
-                        onClick={() => handleBook(service)}
-                    >
-                        Book This Service
-                    </button>
-                </div>
-                </div>
+        <div className="container ">
+            {/* FILTER */}
+            <div className="d-flex justify-content-center mb-5 gold-text">
+                <select
+                className="form-select gold-text"
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                style={{
+                    maxWidth: "320px",
+                    borderRadius: "0",
+                    border: "1px solid #CFC8B8",
+                    padding: "12px 18px",
+                    fontFamily: "serif",
+                    boxShadow: "none"
+                }}
+                >
+                {categories.map(category => (
+                    <option key={category} value={category}>
+                    {category}
+                    </option>
+                ))}
+                </select>
             </div>
+            {/* GROUPED SERVICES */}
+            {Object.entries(groupedServices).map(([group, items]) => (
+                <div key={group} className="mb-5">
+
+                {/* CATEGORY HEADER */}
+                <div className="text-center mb-4 gold-text">
+                    <h2
+                    style={{
+                        fontFamily: "Cormorant Garamond, serif",
+                        fontSize: "clamp(2rem, 4vw, 3rem)",
+                        letterSpacing: "2px",
+                        textTransform: "uppercase"
+                    }}
+                    >
+                    {group}
+                    </h2>
+
+                    <div
+                    className="mx-auto mt-2 gold-text"
+                    style={{
+                        width: "80px",
+                        height: "1px",
+                        background: "#CFC8B8"
+                    }}
+                    />
+
+                </div>
+
+                {/* SERVICES */}
+                <div className="row g-3">
+
+                    {items.map(service => (
+                    <div className="col-md-4 col-lg-3" key={service.id}>
+
+                        <div
+                        className="card border-0 h-100 overflow-hidden"
+                        style={{
+                            background: "#FAF8F4",
+                            transition: "0.3s ease"
+                        }}
+                        >
+
+                        {/* IMAGE */}
+                        <img
+                            src={service.image_url || DEFAULT_IMAGE}
+                            alt={service.name}
+                            className="card-img-top"
+                            style={{
+                            height: "170px",
+                            objectFit: "cover"
+                            }}
+                            onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = DEFAULT_IMAGE;
+                            }}
+                        />
+
+                        {/* BODY */}
+                        <div className="card-body text-center p-3 gold-text">
+
+                            <h5
+                            className="mb-2"
+                            style={{
+
+                                fontFamily: "serif",
+                                fontSize: "20px",
+                                textTransform: "uppercase",
+                                lineHeight: "1.3"
+                            }}
+                            >
+                            {service.name}
+                            </h5>
+                            {/* <p
+                            style={{
+
+                                fontSize: "13px",
+                                opacity: 0.8,
+                                minHeight: "55px"
+                            }}
+                            >
+                            Luxury spa experience crafted for relaxation and wellness.
+                            </p> */}
+                            <div
+                            className="mb-3"
+                            style={{
+                                color: "#8F8B7E",
+                                fontWeight: "600",
+                                fontSize: "20px"
+                            }}
+                            >
+                            £{service.price}
+                            </div>
+
+                            <button
+                            className="btn btn-gold w-100 "
+                            onClick={() => handleBook(service)}
+                            >
+                            BOOK NOW
+                            </button>
+
+                        </div>
+
+                        </div>
+
+                    </div>
+                    ))}
+
+                </div>
+
+                </div>
             ))}
+
         </div>
 
         ) : (

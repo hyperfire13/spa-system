@@ -39,6 +39,32 @@ export default function AdminReservations() {
       setLoading(false);
     }
   };
+  const formatDate = (dateString) => {
+    if (!dateString) return "";
+
+    return new Date(dateString).toLocaleDateString("en-GB", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    });
+    };
+
+  const formatTime = (time) => {
+    if (!time) return "";
+
+    const [hour, minute] = time.split(":");
+
+    const date = new Date();
+    date.setHours(hour);
+    date.setMinutes(minute);
+
+    return date.toLocaleTimeString([], {
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true
+    });
+    };
 
   /* =========================
      UI
@@ -142,13 +168,13 @@ export default function AdminReservations() {
                     </td>
 
                     <td>
-                      {r.reservation_date}
+                      {formatDate(r.reservation_date)}
                     </td>
 
                     <td>
                       {(r.services || []).map(s => (
                         <div key={s.id} className="small">
-                          {s.name}
+                          {s.name} - {formatTime(s.pivot.slot_time)}
                         </div>
                       ))}
                     </td>
