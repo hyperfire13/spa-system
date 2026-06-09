@@ -1,7 +1,23 @@
+import Gallery from "./Gallery";
+
 export default function Hero() {
   return (
     <section className="hero-section mt-5">
       <div className="container">
+        <div className="row">
+            <div className="col-12 d-flex justify-content-center mb-5">
+                <img
+                src="/images/white-logo.jpg"
+                alt="Spa by MJ Logo"
+                className="img-fluid rounded-circle"
+                style={{
+                    width: "220px",
+                    height: "200px",
+                    objectFit: "contain"
+                }}
+                />
+            </div>
+        </div>
         <div className="row align-items-center fade-up">
           {/* LEFT: TEXT */}
           <div className="col-md-6 text-center text-md-start">
@@ -37,14 +53,21 @@ export default function Hero() {
               BEGIN YOUR JOURNEY.
             </button> */}
           </div>
-           {/* RIGHT: LOGO (BIG) */}
-          <div className="col-md-6 d-flex justify-content-center mb-5">
-            <img
+          {/* <div className="col-md-6 d-flex justify-content-center mb-5"> */}
+            {/* <img
               src="/images/white-logo.jpg"
               alt="Spa Logo"
               className="hero-logo-large"
-            />
-          </div>
+            /> */}
+          {/* </div> */}
+           {/* RIGHT: LOGO (BIG) */}
+            <div className="col-md-6 d-flex justify-content-center align-items-center mb-5">
+                <div
+                    className="gallery-gold-shadow"
+                >
+                    <Gallery />
+                </div>
+            </div>
 
         </div>
       </div>

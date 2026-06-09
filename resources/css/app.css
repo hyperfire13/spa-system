@@ -168,3 +168,15 @@ body {
 .card-success-pulse {
   animation: successPulse 1.2s ease;
 }
+
+.gallery-gold-shadow {
+    width: 420px;
+    height: 420px;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow:
+        0 0 12px rgba(199, 184, 138, 0.35),
+        0 0 35px rgba(199, 184, 138, 0.18),
+        0 0 60px rgba(199, 184, 138, 0.08);
+    border: 1px solid rgba(199, 184, 138, 0.25);
+}

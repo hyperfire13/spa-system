@@ -18,19 +18,20 @@ export default function Gallery() {
 
   return (
     <section className="container-fluid mt-5 px-0">
-        <div className="container">
-
+        <div className="container  w-100 h-100">
             <div
             className="mx-auto"
             style={{
                 maxWidth: "900px"
+
             }}
             >
             <div
                 id="spaGallery"
-                className="carousel slide"
+                className="carousel slide w-100 h-100"
                 data-bs-ride="carousel"
                 data-bs-interval="2500"
+
             >
                 <div className="carousel-inner rounded-4 shadow-sm">
 
@@ -39,33 +40,28 @@ export default function Gallery() {
                     className={`carousel-item ${i === 0 ? "active" : ""}`}
                     key={i}
                     >
-                    <div
-                        className="position-relative"
-                        style={{
-                        aspectRatio: "3 / 1"
-                        }}
-                    >
-
-                        <img
-                        src={slide.image}
-                        alt={slide.title}
-                        className="w-100 h-100"
-                        style={{
-                            objectFit: "cover"
-                        }}
-                        loading="lazy"
-                        onError={(e) => {
-                            e.target.onerror = null;
-                            e.target.src = FALLBACK_IMAGE;
-                        }}
+                    <div className="position-relative w-100 h-100">
+                       <img
+                            src={slide.image}
+                            alt={slide.title}
+                            className="w-100 h-100"
+                            style={{
+                                objectFit: "cover",
+                                objectPosition: "center"
+                            }}
+                            loading="lazy"
+                            onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = FALLBACK_IMAGE;
+                            }}
                         />
 
-                        <div
+                        {/* <div
                         className="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center"
 
                         >
                         <h3 className="gold-text">{slide.title}</h3>
-                        </div>
+                        </div> */}
 
                     </div>
                     </div>
