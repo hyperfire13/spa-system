@@ -21,8 +21,15 @@ export default function ReservationForm({ service }) {
   const [success, setSuccess] = useState(null);
   const errorRef = useRef(null);
   const [cardAnim, setCardAnim] = useState("");
-
-
+  const days = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday"
+];
 
   /* =========================
      Load services + schedules
@@ -230,8 +237,8 @@ export default function ReservationForm({ service }) {
   ========================= */
   return (
     <div className="row justify-content-center">
-      <div className="col-md-6">
-        <div className="card  p-4 rounded-4 shadow-sm">
+      <div className="col-12 col-lg-8 col-xl-6">
+        <div  className="card reservation-card p-4 rounded-4 shadow-sm">
           <h6 className="gold-text text-center mb-3 fs-5">
             Please enter your details and select a date to see available services.
           </h6>
@@ -308,18 +315,30 @@ export default function ReservationForm({ service }) {
             </p>
           )}
 
-          <div style={{ maxHeight: 180, overflowY: "auto" }} className="mb-4 fs-5">
+          <div className="services-scroll-container mb-4">
             {availableServices.map(svc => (
-              <div key={svc.id} className="form-check text-start">
+              <div key={svc.id} className="form-check text-start reservation-service-item">
                 <input
                   type="checkbox"
                   className="form-check-input"
                   checked={selectedServices.some(s => s.id === svc.id)}
                   onChange={() => toggleService(svc)}
                 />
-                <label className="form-check-label gold-text">
-                  {svc.name} — ₱{svc.price}
-                </label>
+               <label className="form-check-label gold-text">
+                <div>
+                  {svc.name} — £{svc.price}
+                </div>
+                {(svc.schedules || []).map(schedule => (
+                  <small
+                    key={schedule.id}
+                    className="d-block text-secondary"
+                  >
+                    {days[schedule.day_of_week]} •{" "}
+                    {formatTime(schedule.start_time)} -{" "}
+                    {formatTime(schedule.end_time)}
+                  </small>
+                ))}
+              </label>
               </div>
             ))}
           </div>
@@ -329,7 +348,7 @@ export default function ReservationForm({ service }) {
           {selectedServices.map(svc => (
             <div
               key={svc.id}
-              className="row align-items-center g-2 mb-3 p-2 rounded-3"
+              className="row align-items-center g-3 mb-3 p-3 rounded-3 selected-service-card"
 
             >
 
