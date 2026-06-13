@@ -344,3 +344,71 @@ body {
 .font-youngest {
     font-family: 'TheYoungestScript';
 }
+/* =========================
+   RESERVATION FORM
+========================= */
+
+.reservation-form-card {
+    border: 1px solid rgba(199,184,138,0.15);
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(4px);
+}
+
+/* =========================
+   SERVICES LIST
+========================= */
+
+.reservation-service-item {
+    padding: 12px 8px;
+    border-bottom: 1px solid rgba(199,184,138,0.08);
+
+    align-items: flex-start;
+}
+
+.reservation-checkbox {
+    min-width: 18px;
+    min-height: 18px;
+
+    margin-top: 4px;
+}
+
+.reservation-service-label {
+    width: 100%;
+    cursor: pointer;
+
+    word-break: break-word;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+    .reservation-form-card {
+        padding: 1.25rem !important;
+    }
+
+    .reservation-service-item {
+        padding: 14px 4px;
+    }
+
+    .reservation-service-label {
+        font-size: 14px;
+    }
+
+    .reservation-service-label small {
+        font-size: 12px;
+    }
+
+    .form-control,
+    .form-select,
+    .btn {
+        min-height: 46px;
+    }
+
+    .selected-service-card {
+        padding: 1rem !important;
+    }
+
+}

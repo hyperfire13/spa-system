@@ -25,6 +25,7 @@ class StoreReservationRequest extends FormRequest
             'reservation_date' => ['required','date','after_or_equal:today'],
             'services' => ['required','array','min:1'],
             'services.*.service_id' => ['required','exists:services,id'],
+            'services.*.service_name' => ['nullable','string'],
             'services.*.slot_time' => ['required','date_format:H:i:s'],
         ];
     }

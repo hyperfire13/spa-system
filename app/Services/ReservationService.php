@@ -25,6 +25,7 @@ class ReservationService
             foreach ($data['services'] as $svc) {
 
                 $serviceId = $svc['service_id'];
+                $serviceName = $svc['service_name'];
                 $slotTime  = $svc['slot_time'];
 
                 // Lock schedule row
@@ -44,7 +45,7 @@ class ReservationService
                     ->count();
 
                 if ($count >= $schedule->capacity_per_slot) {
-                    throw new \Exception("Slot full for service {$serviceId} at {$slotTime}");
+                    throw new \Exception("Slot full for service {$serviceName} at {$slotTime}");
                 }
 
                 $reservation->services()->attach($serviceId, [

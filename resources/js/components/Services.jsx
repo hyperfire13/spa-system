@@ -18,7 +18,7 @@ export default function Services({ limit }) {
         try {
             let data = [{"id":25,"name":"Japanese Head Spa","description":"massage for the body","price":"200.00","duration_minutes":60,"is_active":true,"created_at":"2026-02-17T15:54:08.000000Z","updated_at":"2026-02-17T15:54:08.000000Z","image_url":null},{"id":26,"name":"Eyebrow Contour","description":"spa for your foot","price":"150.00","duration_minutes":29,"is_active":true,"created_at":"2026-02-17T15:54:40.000000Z","updated_at":"2026-02-17T15:54:40.000000Z","image_url":null},{"id":24,"name":"Skincare Journey","description":"massage for the head yehey","price":"500.00","duration_minutes":40,"is_active":true,"created_at":"2026-02-17T15:42:47.000000Z","updated_at":"2026-02-17T15:55:17.000000Z","image_url":null}];
             if (typeof limit === "undefined") {
-                const res = await api.get("/services");
+                const res = await api.get("/services-with-schedules");
                 data = Array.isArray(res.data) ? res.data : res.data.data || [];
             }
             setServices(limit ? data.slice(0, limit) : data);
@@ -63,6 +63,32 @@ export default function Services({ limit }) {
   const handleBook = (service) => {
     navigate("/reservation", { state: { service } });
   };
+
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday"
+    ];
+
+    const formatTime = (time) => {
+    if (!time) return "";
+
+    const [hour, minute] = time.split(":");
+
+    const date = new Date();
+    date.setHours(hour);
+    date.setMinutes(minute);
+
+    return date.toLocaleTimeString([], {
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true
+    });
+    };
 
     return (
     <>
@@ -120,10 +146,8 @@ export default function Services({ limit }) {
 
                 {/* SERVICES */}
                 <div className="row g-3">
-
                     {items.map(service => (
                     <div className="col-md-4 col-lg-3" key={service.id}>
-
                         <div
                         className="card border-0 h-100 overflow-hidden"
                         style={{
@@ -131,7 +155,6 @@ export default function Services({ limit }) {
                             transition: "0.3s ease"
                         }}
                         >
-
                         {/* IMAGE */}
                         <img
                             src={service.image_url || DEFAULT_IMAGE}
@@ -146,10 +169,8 @@ export default function Services({ limit }) {
                             e.target.src = DEFAULT_IMAGE;
                             }}
                         />
-
                         {/* BODY */}
                         <div className="card-body text-center p-3 gold-text">
-
                             <h5
                             className="mb-2"
                             style={{
@@ -180,18 +201,29 @@ export default function Services({ limit }) {
                             >
                             £{service.price}
                             </div>
+                            <div className="mb-3">
 
+                                {(service.schedules || []).map(schedule => (
+                                    <div
+                                    key={schedule.id}
+                                    className="small text-secondary"
+                                    >
+                                    {days[schedule.day_of_week]} •{" "}
+                                    {formatTime(schedule.start_time)} -{" "}
+                                    {formatTime(schedule.end_time)}
+                                    </div>
+                                ))}
+
+                                </div>
                             <button
                             className="btn btn-gold w-100 "
                             onClick={() => handleBook(service)}
                             >
                             BOOK NOW
                             </button>
-
                         </div>
 
                         </div>
-
                     </div>
                     ))}
 

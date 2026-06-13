@@ -276,7 +276,7 @@ export default function AdminServices() {
         {showForm && (
             <div className="modal d-block" style={{background:"rgba(0,0,0,.6)"}}>
             <div className="modal-dialog">
-                <div className="modal-content  text-white">
+                <div className="modal-content bg-dark  text-white">
 
                 <div className="modal-header">
                     <h5 className="text-warning">

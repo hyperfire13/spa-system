@@ -164,6 +164,7 @@ export default function ReservationForm({ service }) {
         reservation_date: form.date,
         services: selectedServices.map(s => ({
           service_id: s.id,
+          service_name:s.name,
           slot_time: serviceSlots[s.id]
         }))
       });
@@ -237,8 +238,8 @@ export default function ReservationForm({ service }) {
   ========================= */
   return (
     <div className="row justify-content-center">
-      <div className="col-md-6 font-nourd">
-        <div className="card  p-4 rounded-4 shadow-sm">
+      <div className="col-12 col-md-10 col-lg-8 col-xl-6 font-nourd">
+        <div className="card reservation-form-card p-3 p-md-4 rounded-4 shadow-sm">
           <h6 className="gold-text text-center mb-3 fs-5 ">
             Please enter your details and select a date to see available services.
           </h6>
@@ -317,14 +318,14 @@ export default function ReservationForm({ service }) {
 
           <div className="services-scroll-container mb-4">
             {availableServices.map(svc => (
-              <div key={svc.id} className="form-check text-start reservation-service-item">
+              <div key={svc.id} className="form-check text-start reservation-service-item d-flex gap-2 ms-5">
                 <input
-                  type="checkbox"
-                  className="form-check-input"
-                  checked={selectedServices.some(s => s.id === svc.id)}
-                  onChange={() => toggleService(svc)}
+                    type="checkbox"
+                    className="form-check-input reservation-checkbox"
+                    checked={selectedServices.some(s => s.id === svc.id)}
+                    onChange={() => toggleService(svc)}
                 />
-               <label className="form-check-label gold-text">
+               <label className="form-check-label gold-text reservation-service-label">
                 <div>
                   {svc.name} — £{svc.price}
                 </div>
@@ -363,6 +364,16 @@ export default function ReservationForm({ service }) {
                   Duration: {svc.duration_minutes ?? "—"} min
                   &nbsp;•&nbsp;
                   £{svc.price}
+                  {(svc.schedules || []).map(schedule => (
+                  <small
+                    key={schedule.id}
+                    className="d-block text-secondary"
+                  >
+                    {days[schedule.day_of_week]} •{" "}
+                    {formatTime(schedule.start_time)} -{" "}
+                    {formatTime(schedule.end_time)}
+                  </small>
+                ))}
                 </div>
 
               </div>
