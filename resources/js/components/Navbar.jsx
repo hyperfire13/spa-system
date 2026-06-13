@@ -18,7 +18,7 @@ export default function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg bg-white  fixed-top shadow-sm">
       <div className="container">
-        <span className="navbar-brand fw-bold gold-text">
+        <span className="navbar-brand fw-bold gold-text font-youngest">
           SPA BY MJ
         </span>
 
@@ -30,20 +30,20 @@ export default function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div id="nav" className="collapse navbar-collapse" ref={navRef}>
+        <div id="nav" className="collapse navbar-collapse " ref={navRef}>
           <ul className="navbar-nav ms-auto">
-            <li className="nav-item">
-              <Link to="/" className="nav-link gold-text" onClick={closeMenu}>
+            <li className="nav-item ">
+              <Link to="/" className="nav-link gold-text font-youngest" onClick={closeMenu}>
                 Home
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/services" className="nav-link gold-text" onClick={closeMenu}>
+              <Link to="/services" className="nav-link gold-text font-youngest" onClick={closeMenu}>
                 Services
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/reservation" className="nav-link gold-text" onClick={closeMenu}>
+              <Link to="/reservation" className="nav-link gold-text font-youngest" onClick={closeMenu}>
                 Book
               </Link>
             </li>

@@ -31,7 +31,7 @@ export default function Home() {
         {/* <Gallery /> */}
         <section className="py-5 text-center">
             <h1 className="gold-text mb-3 font-pinyon">Our Services</h1>
-            <p className="fw-medium gold-text font-youngest">
+            <p className="fw-medium gold-text font-nourd">
             Indulge in premium treatments crafted to restore balance, beauty, and wellness.
             </p>
 
@@ -88,7 +88,7 @@ export default function Home() {
                         {advancedServices.map(service => (
                         <div
                             key={service.id}
-                            className="pb-2 mb-3 font-youngest"
+                            className="pb-2 mb-3 font-nourd"
                             style={{
                             borderBottom: "1px solid #C7C2A8"
                             }}
@@ -112,7 +112,7 @@ export default function Home() {
                         {enhancementServices.map(service => (
                         <div
                             key={service.id}
-                            className="pb-2 mb-3 font-youngest"
+                            className="pb-2 mb-3 font-nourd"
                             style={{
                             borderBottom: "1px solid #C7C2A8"
                             }}

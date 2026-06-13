@@ -69,7 +69,7 @@ export default function Services({ limit }) {
         {limit === undefined ? (
 
         /* FULL CARD LAYOUT */
-        <div className="container font-youngest">
+        <div className="container font-nourd">
             {/* FILTER */}
             <div className="d-flex justify-content-center mb-5 gold-text">
                 <select
@@ -96,7 +96,7 @@ export default function Services({ limit }) {
                 <div key={group} className="mb-5">
 
                 {/* CATEGORY HEADER */}
-                <div className="text-center mb-4 gold-text font-youngest">
+                <div className="text-center mb-4 gold-text font-nourd">
                     <h2
                     style={{
                         fontSize: "clamp(2rem, 4vw, 3rem)",
@@ -205,7 +205,7 @@ export default function Services({ limit }) {
         ) : (
 
         /* MINI HERO LAYOUT */
-        <div className="row g-4 font-youngest">
+        <div className="row g-4 font-nourd">
             {services.map(service => (
             <div className="col-md-4" key={service.id}>
 

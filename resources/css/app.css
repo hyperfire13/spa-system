@@ -324,7 +324,7 @@ body {
 
 @font-face {
     font-family: 'TheYoungestScript';
-    src: url('/fonts/youngest/the-youngest-script.ttf') format('truetype');
+    src: url('/fonts/youngest/the-youngest-serif-display.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -342,5 +342,5 @@ body {
 }
 
 .font-youngest {
-    font-family: 'TheYoungestScript', cursive;
+    font-family: 'TheYoungestScript';
 }

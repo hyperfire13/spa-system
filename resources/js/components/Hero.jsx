@@ -33,10 +33,10 @@ export default function Hero() {
             <h1 className="display-3 fw-medium gold-text font-pinyon">
               Return to Stillness.<br/>
             </h1>
-            <h3 className="fw-medium font-nourd">
+            <h3 className="fw-medium font-youngest">
               A SANCTUARY FOR THE SENSES.<br/>
             </h3>
-            <p className="fw-medium fs-6 font-youngest" style={{ maxWidth: "420px" }}>
+            <p className="fw-medium fs-6 font-nourd" style={{ maxWidth: "420px" }}>
               Welcome to Spa by MJ, a restorative haven where holistic healing meets refined elegance. Immerse yourself in a space of tranquility, designed to soothe the soul and awaken the light within. <br/><br/>
               Experience bespoke rituals crafted for balance and serenity.
             </p>
