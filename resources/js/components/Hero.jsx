@@ -30,17 +30,17 @@ export default function Hero() {
               Elegance<br />
               Refined Beauty
             </h1> */}
-            <h1 className="display-3 fw-semibold gold-text">
+            <h1 className="display-3 fw-medium gold-text font-pinyon">
               Return to Stillness.<br/>
             </h1>
-            <h3 className="fw-semibold">
+            <h3 className="fw-medium font-nourd">
               A SANCTUARY FOR THE SENSES.<br/>
             </h3>
-            <p className="fw-semibold fs-6" style={{ maxWidth: "420px" }}>
+            <p className="fw-medium fs-6 font-youngest" style={{ maxWidth: "420px" }}>
               Welcome to Spa by MJ, a restorative haven where holistic healing meets refined elegance. Immerse yourself in a space of tranquility, designed to soothe the soul and awaken the light within. <br/><br/>
               Experience bespoke rituals crafted for balance and serenity.
             </p>
-            <button className="gold-text btn btn-outline-warning mt-3 mb-3">
+            <button className="gold-text btn btn-outline-warning mt-3 mb-3 ">
               <b>BEGIN YOUR JOURNEY.</b>
             </button>
 

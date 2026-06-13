@@ -237,9 +237,9 @@ export default function ReservationForm({ service }) {
   ========================= */
   return (
     <div className="row justify-content-center">
-      <div className="col-12 col-lg-8 col-xl-6">
-        <div  className="card reservation-card p-4 rounded-4 shadow-sm">
-          <h6 className="gold-text text-center mb-3 fs-5">
+      <div className="col-md-6 font-nourd">
+        <div className="card  p-4 rounded-4 shadow-sm">
+          <h6 className="gold-text text-center mb-3 fs-5 ">
             Please enter your details and select a date to see available services.
           </h6>
           {/* <p className="text-white">{JSON.stringify(selectedServices)}</p>

@@ -69,7 +69,7 @@ export default function Services({ limit }) {
         {limit === undefined ? (
 
         /* FULL CARD LAYOUT */
-        <div className="container ">
+        <div className="container font-youngest">
             {/* FILTER */}
             <div className="d-flex justify-content-center mb-5 gold-text">
                 <select
@@ -81,7 +81,6 @@ export default function Services({ limit }) {
                     borderRadius: "0",
                     border: "1px solid #CFC8B8",
                     padding: "12px 18px",
-                    fontFamily: "serif",
                     boxShadow: "none"
                 }}
                 >
@@ -97,10 +96,9 @@ export default function Services({ limit }) {
                 <div key={group} className="mb-5">
 
                 {/* CATEGORY HEADER */}
-                <div className="text-center mb-4 gold-text">
+                <div className="text-center mb-4 gold-text font-youngest">
                     <h2
                     style={{
-                        fontFamily: "Cormorant Garamond, serif",
                         fontSize: "clamp(2rem, 4vw, 3rem)",
                         letterSpacing: "2px",
                         textTransform: "uppercase"
@@ -155,8 +153,6 @@ export default function Services({ limit }) {
                             <h5
                             className="mb-2"
                             style={{
-
-                                fontFamily: "serif",
                                 fontSize: "20px",
                                 textTransform: "uppercase",
                                 lineHeight: "1.3"
@@ -209,7 +205,7 @@ export default function Services({ limit }) {
         ) : (
 
         /* MINI HERO LAYOUT */
-        <div className="row g-4">
+        <div className="row g-4 font-youngest">
             {services.map(service => (
             <div className="col-md-4" key={service.id}>
 
@@ -253,7 +249,6 @@ export default function Services({ limit }) {
                         style={{
                         color: "#8F8B7E",
                         letterSpacing: "1.5px",
-                        fontFamily: "serif",
                         fontSize: "clamp(20px, 2vw, 32px)",
                         textTransform: "uppercase",
                         textShadow: "0 2px 10px rgba(0,0,0,0.08)"

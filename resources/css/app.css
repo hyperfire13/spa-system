@@ -1,5 +1,7 @@
 @import 'tailwindcss';
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=The+Nautigal:wght@400;700&display=swap');
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
@@ -307,4 +309,20 @@ body {
     .btn-gold {
         width: 100%;
     }
+}
+
+.font-pinyon {
+    font-family: 'Pinyon Script', cursive;
+}
+
+.font-nautigal {
+    font-family: 'The Nautigal', cursive;
+}
+
+.font-nourd {
+    font-family: 'Nourd', sans-serif;
+}
+
+.font-youngest {
+    font-family: 'TheYoungestScript', cursive;
 }

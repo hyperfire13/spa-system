@@ -30,8 +30,8 @@ export default function Home() {
         <Hero />
         {/* <Gallery /> */}
         <section className="py-5 text-center">
-            <h2 className="gold-text mb-3">Our Services</h2>
-            <p className="fw-semibold gold-text">
+            <h1 className="gold-text mb-3 font-pinyon">Our Services</h1>
+            <p className="fw-medium gold-text font-youngest">
             Indulge in premium treatments crafted to restore balance, beauty, and wellness.
             </p>
 
@@ -66,16 +66,11 @@ export default function Home() {
         </section> */}
             <section className="py-5">
                 <div className="container text-center">
-                    <h4
-                    className="mb-5 gold-text"
-                    style={{
-
-                        fontFamily: "serif",
-                        fontSize: "clamp(2rem, 3vw, 2rem)"
-                    }}
+                    <h1
+                    className="mb-5 gold-text font-pinyon"
                     >
-                    CURATED SKINCARE RITUALS
-                    </h4>
+                    Curated Skincare Rituals
+                    </h1>
 
                     <div className="row text-start">
 
@@ -93,7 +88,7 @@ export default function Home() {
                         {advancedServices.map(service => (
                         <div
                             key={service.id}
-                            className="pb-2 mb-3"
+                            className="pb-2 mb-3 font-youngest"
                             style={{
                             borderBottom: "1px solid #C7C2A8"
                             }}
@@ -117,7 +112,7 @@ export default function Home() {
                         {enhancementServices.map(service => (
                         <div
                             key={service.id}
-                            className="pb-2 mb-3"
+                            className="pb-2 mb-3 font-youngest"
                             style={{
                             borderBottom: "1px solid #C7C2A8"
                             }}
