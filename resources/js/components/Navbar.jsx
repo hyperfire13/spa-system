@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { useRef } from "react";
 import { useAuth } from "../auth/AuthContext";
+import { useLocation } from "react-router-dom";
 
 export default function Navbar() {
   const navRef = useRef(null);
+  const location = useLocation();
   const { admin } = useAuth();
   const closeMenu = () => {
     if (navRef.current.classList.contains("show")) {
@@ -11,9 +13,9 @@ export default function Navbar() {
     }
   };
 
-  if (admin) {
-    return null; // Don't show navbar if admin is logged in
-  }
+  if (admin && location.pathname.startsWith("/admin")) {
+    return null;
+    }
 
   return (
     <nav className="navbar navbar-expand-lg bg-white  fixed-top shadow-sm">

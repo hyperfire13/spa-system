@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useAuth } from "../auth/AuthContext";
+import { Navigate } from "react-router-dom";
 
 export default function AdminLogin() {
 
-  const { login } = useAuth();
+  const { admin, login } = useAuth();
 
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
@@ -24,6 +25,8 @@ export default function AdminLogin() {
       setLoading(false);
     }
   };
+
+  if (admin) return <Navigate to="/admin/" replace />;
 
   return (
     <div className="container py-5">
