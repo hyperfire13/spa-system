@@ -203,18 +203,28 @@ export default function Services({ limit }) {
                             </div>
                             <div className="mb-3">
 
-                                {(service.schedules || []).map(schedule => (
-                                    <div
-                                    key={schedule.id}
-                                    className="small text-secondary"
-                                    >
-                                    {days[schedule.day_of_week]} •{" "}
-                                    {formatTime(schedule.start_time)} -{" "}
-                                    {formatTime(schedule.end_time)}
-                                    </div>
-                                ))}
+                                {(service.schedules || []).length > 0 ? (
 
-                                </div>
+                                    (service.schedules || []).map(schedule => (
+                                    <div
+                                        key={schedule.id}
+                                        className="small text-secondary"
+                                    >
+                                        {days[schedule.day_of_week]} •{" "}
+                                        {formatTime(schedule.start_time)} -{" "}
+                                        {formatTime(schedule.end_time)}
+                                    </div>
+                                    ))
+
+                                ) : (
+
+                                    <div className="small gold-text">
+                                    Schedule will be announced soon.
+                                    </div>
+
+                                )}
+
+                            </div>
                             <button
                             className="btn btn-gold w-100 "
                             onClick={() => handleBook(service)}
