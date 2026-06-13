@@ -311,6 +311,24 @@ body {
     }
 }
 
+/* =========================
+   CUSTOM FONTS
+========================= */
+
+@font-face {
+    font-family: 'Nourd';
+    src: url('/fonts/nourd/nourd_medium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'TheYoungestScript';
+    src: url('/fonts/youngest/the-yougest-script.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .font-pinyon {
     font-family: 'Pinyon Script', cursive;
 }
