@@ -4,7 +4,7 @@ import api from "../lib/api";
 import Loading from "./Loading";
 import ErrorMessage from "./ErrorMessage";
 
-const DEFAULT_IMAGE = "/images/default-img.webp";
+const DEFAULT_IMAGE = "/images/spa-room-1.webp";
 
 export default function Services({ limit }) {
   const [services, setServices] = useState([]);
