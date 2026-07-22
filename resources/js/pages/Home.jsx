@@ -28,7 +28,6 @@ export default function Home() {
         <>
         <div className="container">
         <Hero />
-        {/* <Gallery /> */}
         <section className="py-5 text-center">
             <h1 className="gold-text mb-3 font-pinyon">Our Services</h1>
             <p className="fw-medium gold-text font-nourd">
@@ -64,6 +63,19 @@ export default function Home() {
             </Link>
             </div>
         </section> */}
+            <section className="py-5">
+            <div className="container">
+
+                <h2 className="text-center gold-text font-pinyon mb-4">
+                    Our Gallery
+                </h2>
+
+                <div className="home-gallery mx-auto">
+                    <Gallery compact />
+                </div>
+
+            </div>
+        </section>
             <section className="py-5">
                 <div className="container text-center">
                     <h1

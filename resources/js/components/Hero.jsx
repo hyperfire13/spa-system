@@ -61,13 +61,31 @@ export default function Hero() {
             /> */}
           {/* </div> */}
            {/* RIGHT: LOGO (BIG) */}
-            <div className="col-md-6 d-flex justify-content-center align-items-center mb-5">
+           <div className="col-md-6 d-flex justify-content-center align-items-center mb-5">
+                <div className="gallery-gold-shadow">
+
+                    {/* <Gallery /> */}
+
+                    <video
+                        className="hero-video"
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                    >
+                        <source src="/videos/spa-video.mp4" type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+
+                </div>
+            </div>
+            {/* <div className="col-md-6 d-flex justify-content-center align-items-center mb-5">
                 <div
                     className="gallery-gold-shadow"
                 >
                     <Gallery />
                 </div>
-            </div>
+            </div> */}
 
         </div>
       </div>
