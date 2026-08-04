@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Service;
+use App\Models\ServiceSchedule;
 use Carbon\Carbon;
 use App\Models\Reservation;
 
@@ -52,7 +53,7 @@ class ServiceService
     {
         $day = Carbon::parse($date)->dayOfWeek;
 
-        $schedule = \App\Models\ServiceSchedule::query()
+        $schedule = ServiceSchedule::query()
             ->where('service_id', $serviceId)
             ->where('day_of_week', $day)
             ->first();
@@ -71,14 +72,14 @@ class ServiceService
             $slotTime = $start->format('H:i:s');
 
             // count reservations using this service at this slot
-            $count = Reservation::whereDate('reservation_date', $date)
-                ->whereTime('reservation_time', $slotTime)
-                ->whereHas('services', fn ($q) =>
-                    $q->where('service_id', $serviceId)
+            $reservationCount = Reservation::whereDate('reservation_date', $date)
+                ->whereHas('services', fn ($query) =>
+                    $query->where('services.id', $serviceId)
+                        ->whereTime('reservation_services.slot_time', $slotTime)
                 )
                 ->count();
 
-            if ($count < $schedule->capacity_per_slot) {
+            if ($reservationCount < $schedule->capacity_per_slot) {
                 $slots[] = $slotTime;
             }
 

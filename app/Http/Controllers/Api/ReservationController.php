@@ -17,8 +17,9 @@ class ReservationController extends Controller
     public function store(StoreReservationRequest $request)
     {
         try {
-            $res = $this->reservationService->create($request->validated());
-            return response()->json($res, 201);
+            $reservation = $this->reservationService->store($request->validated());
+
+            return response()->json($reservation, 201);
         } catch (\Exception $e) {
             return response()->json([
                 'message' => $e->getMessage()
@@ -28,13 +29,13 @@ class ReservationController extends Controller
 
     public function adminIndex(Request $request)
     {
-        $data = $this->reservationService->getAdminList([
+        $reservations = $this->reservationService->list([
             'status'   => $request->status,
             'search'   => $request->search,
             'per_page' => $request->per_page,
         ]);
 
-        return response()->json($data);
+        return response()->json($reservations);
     }
 
 }

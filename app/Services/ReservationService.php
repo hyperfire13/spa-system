@@ -9,7 +9,7 @@ use Carbon\Carbon;
 
 class ReservationService
 {
-    public function create(array $data)
+    public function store(array $data)
     {
         return DB::transaction(function () use ($data) {
 
@@ -22,11 +22,11 @@ class ReservationService
                 'status' => 'pending',
             ]);
 
-            foreach ($data['services'] as $svc) {
+            foreach ($data['services'] as $selectedService) {
 
-                $serviceId = $svc['service_id'];
-                $serviceName = $svc['service_name'];
-                $slotTime  = $svc['slot_time'];
+                $serviceId = $selectedService['service_id'];
+                $serviceName = $selectedService['service_name'];
+                $slotTime = $selectedService['slot_time'];
 
                 // Lock schedule row
                 $schedule = ServiceSchedule::where('service_id', $serviceId)
@@ -37,14 +37,14 @@ class ReservationService
                     ->firstOrFail();
 
                 // count existing reservations for that slot
-                $count = DB::table('reservation_services')
+                $reservationCount = DB::table('reservation_services')
                     ->join('reservations','reservations.id','=','reservation_services.reservation_id')
                     ->where('reservation_services.service_id',$serviceId)
                     ->where('reservation_services.slot_time',$slotTime)
                     ->whereDate('reservations.reservation_date',$data['reservation_date'])
                     ->count();
 
-                if ($count >= $schedule->capacity_per_slot) {
+                if ($reservationCount >= $schedule->capacity_per_slot) {
                     throw new \Exception("Slot full for service {$serviceName} at {$slotTime}");
                 }
 
@@ -57,25 +57,25 @@ class ReservationService
         });
     }
 
-    public function getAdminList(array $filters = [])
+    public function list(array $filters = [])
     {
-        $q = Reservation::with(['services'])
+        $query = Reservation::with(['services'])
             ->latest();
 
         if (!empty($filters['status'])) {
-            $q->where('status', $filters['status']);
+            $query->where('status', $filters['status']);
         }
 
         if (!empty($filters['search'])) {
-            $s = $filters['search'];
+            $search = $filters['search'];
 
-            $q->where(function ($w) use ($s) {
-                $w->where('customer_name', 'like', "%{$s}%")
-                  ->orWhere('customer_phone', 'like', "%{$s}%");
+            $query->where(function ($query) use ($search) {
+                $query->where('customer_name', 'like', "%{$search}%")
+                    ->orWhere('customer_phone', 'like', "%{$search}%");
             });
         }
 
-        return $q->paginate(
+        return $query->paginate(
             $filters['per_page'] ?? 15
         );
     }

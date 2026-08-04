@@ -351,6 +351,7 @@ body {
     border: 1px solid rgba(199,184,138,0.15);
     background: rgba(255,255,255,0.03);
     backdrop-filter: blur(4px);
+    overflow: hidden;
 }
 
 /* =========================
@@ -358,24 +359,66 @@ body {
 ========================= */
 
 .reservation-service-item {
+    display: grid;
+    grid-template-columns: 18px minmax(0, 1fr);
+    column-gap: 0.625rem;
+    width: 100%;
+    margin-left: 0;
     padding: 12px 8px;
     border-bottom: 1px solid rgba(199,184,138,0.08);
-
     align-items: flex-start;
+    box-sizing: border-box;
+}
+
+.reservation-selection-count {
+    color: #1f1f1f;
+    background: #c7b88a;
+    white-space: nowrap;
 }
 
 .reservation-checkbox {
-    min-width: 18px;
-    min-height: 18px;
-
-    margin-top: 4px;
+    float: none;
+    appearance: auto;
+    -webkit-appearance: checkbox;
+    width: 18px;
+    height: 18px;
+    min-width: 0;
+    min-height: 0;
+    margin: 4px 0 0;
+    padding: 0;
+    accent-color: #c7b88a;
+    box-sizing: border-box;
+    cursor: pointer;
 }
 
 .reservation-service-label {
-    width: 100%;
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
     cursor: pointer;
-
     word-break: break-word;
+}
+
+.selected-services-list {
+    display: grid;
+    gap: 0.75rem;
+    max-height: 420px;
+    overflow-y: auto;
+    padding-right: 0.25rem;
+    scrollbar-gutter: stable;
+}
+
+.selected-service-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(180px, 0.7fr);
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem;
+}
+
+.selected-service-details,
+.selected-service-slot {
+    min-width: 0;
 }
 
 /* =========================
@@ -384,12 +427,18 @@ body {
 
 @media (max-width: 768px) {
 
+    .reservation-page-container {
+        padding-right: 0.75rem;
+        padding-left: 0.75rem;
+    }
+
     .reservation-form-card {
-        padding: 1.25rem !important;
+        padding: 1rem !important;
     }
 
     .reservation-service-item {
-        padding: 14px 4px;
+        margin-left: 0;
+        padding: 14px 2px;
     }
 
     .reservation-service-label {
@@ -407,7 +456,14 @@ body {
     }
 
     .selected-service-card {
-        padding: 1rem !important;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.75rem;
+        padding: 0.875rem !important;
+    }
+
+    .selected-services-list {
+        max-height: min(55vh, 480px);
+        padding-right: 0.125rem;
     }
 
 }
